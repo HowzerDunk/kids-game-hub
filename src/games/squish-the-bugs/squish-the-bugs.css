@@ -171,12 +171,6 @@
   stroke-width: 8;
 }
 
-.scene-anthill .hill-hole {
-  fill: #17120e;
-  stroke: #5e3107;
-  stroke-width: 8;
-}
-
 .scene-anthill .hill-highlight {
   fill: none;
   stroke: #d18a28;
