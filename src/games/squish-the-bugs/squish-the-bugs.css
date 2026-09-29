@@ -37,7 +37,7 @@
 
 .bugs-game {
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
   width: min(1180px, 100%);
   min-height: 430px;
   margin: auto;
@@ -47,32 +47,22 @@
   box-shadow: 0 8px 0 #67a95f, 0 16px 28px #3d704133;
 }
 
-.bugs-status {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 0 5px 8px;
-}
-
 .wave-display {
+  position: absolute;
+  z-index: 6;
+  top: 12px;
+  right: 14px;
   display: flex;
   align-items: center;
   gap: 6px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: #fff8e9db;
+  box-shadow: 0 3px 0 #d8c99f;
   font: 700 clamp(18px, 3.5vw, 25px) "Fredoka";
 }
 
 .wave-display span { font-size: 23px; }
-
-.sandwich-health {
-  display: flex;
-  gap: 3px;
-  color: #dccfc4;
-  font-size: clamp(20px, 3.5vw, 26px);
-  letter-spacing: -2px;
-}
-
-.sandwich-health .is-full { color: #ec6555; }
 
 .picnic {
   position: relative;
@@ -120,24 +110,16 @@
   left: 8%;
   top: 61%;
   display: grid;
-  width: 104px;
+  width: clamp(120px, 20vw, 190px);
   place-items: center;
   transform: translateY(-50%);
 }
 
-.sandwich span {
-  font-size: 76px;
-  line-height: 1;
+.sandwich svg {
+  display: block;
+  width: 100%;
+  overflow: visible;
   filter: drop-shadow(0 7px 2px #795a344d);
-}
-
-.sandwich small {
-  margin-top: -5px;
-  padding: 3px 8px;
-  border-radius: 999px;
-  color: #755836;
-  background: #fff2d4e8;
-  font: 700 11px "Fredoka";
 }
 
 .sandwich.is-hit { animation: sandwich-wiggle 0.34s ease; }
@@ -171,29 +153,42 @@
   animation: ladybug-crawl 0.3s steps(2, end) infinite;
 }
 
+.bug .ant-art {
+  display: block;
+  width: 54px;
+  height: auto;
+  overflow: visible;
+  filter: drop-shadow(0 5px 2px #29405240);
+  animation: ant-crawl 0.28s steps(2, end) infinite;
+}
+
+.bug .ant-legs {
+  transform-origin: center;
+  animation: ant-legs 0.28s steps(2, end) infinite;
+}
+
+.squish-poof {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  color: #ffd45b;
+  font-size: 46px !important;
+  line-height: 1;
+  filter: drop-shadow(0 2px #d85f50) !important;
+  pointer-events: none;
+  animation: squish-poof 0.3s ease-out both !important;
+}
+
 .bug.is-squished {
-  animation: bug-squish 0.25s both;
   pointer-events: none;
 }
+
+.bug.is-squished .ant-art { animation: bug-squish 0.25s both; }
 
 .bug.is-squished span,
 .bug.is-escaped span { animation: none; }
 
 .bug.is-escaped {
   animation: bug-escape 0.25s both;
-  pointer-events: none;
-}
-
-.tap-hint {
-  position: absolute;
-  z-index: 3;
-  right: 4%;
-  bottom: 5%;
-  margin: 0;
-  color: #fff;
-  font: 700 clamp(15px, 2.6vw, 20px) "Fredoka";
-  text-shadow: 0 2px #4b9660;
-  white-space: nowrap;
   pointer-events: none;
 }
 
@@ -215,16 +210,6 @@
 }
 
 .wave-announcement.is-visible { animation: wave-pop 1.25s both; }
-
-.sky-sparkle {
-  position: absolute;
-  z-index: 1;
-  color: #fff8d2;
-  font-size: 24px;
-}
-
-.sparkle-one { top: 13%; left: 40%; }
-.sparkle-two { top: 29%; right: 16%; font-size: 15px; }
 
 .bugs-game-over {
   position: fixed;
@@ -268,6 +253,21 @@
   100% { transform: translate(3px, -2px) rotate(7deg); }
 }
 
+@keyframes ant-crawl {
+  0% { transform: translate(-3px, 2px) rotate(-3deg); }
+  100% { transform: translate(3px, -2px) rotate(3deg); }
+}
+
+@keyframes ant-legs {
+  0% { transform: skewY(-5deg); }
+  100% { transform: skewY(5deg); }
+}
+
+@keyframes squish-poof {
+  from { opacity: 1; transform: translate(-50%, -50%) scale(0.25) rotate(0); }
+  to { opacity: 0; transform: translate(-50%, -50%) scale(1.65) rotate(35deg); }
+}
+
 @keyframes sandwich-wiggle {
   25% { transform: translateY(-50%) rotate(-7deg); }
   75% { transform: translateY(-50%) rotate(7deg); }
@@ -287,21 +287,15 @@
   }
 
   .bugs-shell {
+    grid-template-rows: minmax(0, 1fr);
     height: 100%;
     min-height: 0;
     padding: 4px max(10px, env(safe-area-inset-right)) max(9px, env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left));
   }
 
   .bugs-intro {
-    display: flex;
-    align-items: baseline;
-    justify-content: center;
-    gap: 12px;
-    padding: 2px 0 5px;
+    display: none;
   }
-
-  .bugs-intro p { margin: 0; }
-  .bugs-intro h1 { font-size: clamp(27px, 5vh, 40px); letter-spacing: -1px; }
 
   .bugs-game {
     width: 100%;
@@ -312,10 +306,8 @@
     border-radius: 19px;
   }
 
-  .bugs-status { padding-bottom: 5px; }
   .wave-display { font-size: clamp(17px, 3.6vh, 23px); }
   .wave-display span { font-size: 20px; }
-  .sandwich-health { font-size: clamp(18px, 3.5vh, 24px); }
 
   .picnic {
     min-height: 0;
@@ -331,9 +323,8 @@
   }
 
   .sandwich { left: 7%; top: 61%; }
-  .sandwich span { font-size: clamp(62px, 14vh, 88px); }
   .bug { width: 68px; height: 68px; }
-  .bug span { font-size: clamp(38px, 9vh, 49px); }
+  .bug .ant-art { width: clamp(42px, 10vh, 57px); }
 }
 
 @media (orientation: portrait) and (max-width: 700px) {
@@ -356,9 +347,11 @@
     animation: turn-phone 1.8s ease-in-out infinite;
   }
 
-  .rotate-prompt strong {
-    max-width: 280px;
-    font: 700 32px/1.05 "Fredoka";
+  .rotate-prompt i {
+    color: #ed6b58;
+    font: 700 58px/1 "Fredoka";
+    font-style: normal;
+    animation: turn-arrow 1.8s ease-in-out infinite;
   }
 }
 
@@ -367,12 +360,20 @@
   65%, 100% { transform: rotate(90deg); }
 }
 
+@keyframes turn-arrow {
+  0%, 25% { opacity: 0.3; transform: rotate(-40deg); }
+  65%, 100% { opacity: 1; transform: rotate(40deg); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .bug,
   .bug span,
+  .bug .ant-art,
+  .bug .ant-legs,
   .sandwich,
   .wave-announcement,
-  .rotate-prompt span {
+  .rotate-prompt span,
+  .rotate-prompt i {
     animation: none !important;
   }
 }
