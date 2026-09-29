@@ -38,10 +38,13 @@ src/
   main.js                   Site router and game mounting
   games/
     registry.js             Games shown on the home screen
+    dress-up/               Layered character and wardrobe game
     memory-game/            Memory Garden logic and scoped styles
+    squish-the-bugs/        Landscape picnic-defense game
   styles/                   Shared site styles
 public/
   icons/                    Temporary PWA and Apple home-screen icons
+  games/dress-up/           Dress Up character artwork
   games/memory-game/        Memory Garden card images
 Memory Game/                Original local source (kept outside Git)
 ```
