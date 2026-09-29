@@ -33,7 +33,7 @@ const dressShape = (fill, detail = "", skirt = "M301 450Q384 471 467 450L548 786
 export const moanaCharacter = {
   id: "moana",
   name: "Moana",
-  baseImage: "/games/dress-up/characters/moana/moana-base.webp",
+  baseImage: `${import.meta.env.BASE_URL}games/dress-up/characters/moana/moana-base.webp`,
   viewBox: "0 0 768 1152",
   layerOrder: ["tops", "bottoms", "dresses", "shoes", "hats", "accessories"],
   categories: [
