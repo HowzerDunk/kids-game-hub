@@ -15,6 +15,10 @@ export function mountSquishTheBugs(root) {
   root.className = "squish-the-bugs";
   root.innerHTML = `
     <main class="bugs-shell">
+      <div class="rotate-prompt" aria-label="Turn your phone sideways">
+        <span aria-hidden="true">📱</span>
+        <strong>Turn your phone sideways!</strong>
+      </div>
       <section class="bugs-intro">
         <p>KEEP THE PICNIC YUMMY!</p>
         <h1>Squish the bugs!</h1>
