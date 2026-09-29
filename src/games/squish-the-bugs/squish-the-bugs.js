@@ -28,15 +28,19 @@ export function mountSquishTheBugs(root) {
           <div class="wave-display"><span aria-hidden="true">🌼</span><strong data-wave>1</strong></div>
           <div class="picnic-blanket" aria-hidden="true"></div>
           <div class="sandwich" data-sandwich aria-label="The picnic sandwich, five bites left">
-            <svg viewBox="0 0 220 160" role="img" aria-hidden="true">
-              <defs><mask id="sandwich-bites"><rect width="220" height="160" fill="white"/><circle data-bite cx="202" cy="30" r="24" fill="white"/><circle data-bite cx="205" cy="79" r="23" fill="white"/><circle data-bite cx="192" cy="132" r="26" fill="white"/><circle data-bite cx="136" cy="151" r="23" fill="white"/><circle data-bite cx="77" cy="150" r="22" fill="white"/></mask></defs>
+            <svg viewBox="0 0 240 180" role="img" aria-hidden="true">
+              <defs><mask id="sandwich-bites"><rect width="240" height="180" fill="white"/><circle data-bite cx="229" cy="44" r="28" fill="white"/><circle data-bite cx="230" cy="94" r="27" fill="white"/><circle data-bite cx="219" cy="148" r="29" fill="white"/><circle data-bite cx="164" cy="170" r="27" fill="white"/><circle data-bite cx="105" cy="171" r="27" fill="white"/></mask></defs>
               <g mask="url(#sandwich-bites)">
-                <path d="M22 60L111 20L200 60L190 137L111 154L31 137Z" fill="#d98525"/>
-                <path d="M27 94L111 61L195 94L185 119L111 143L36 119Z" fill="#75ad3e"/>
-                <path d="M31 87L111 54L191 87L182 105L111 130L40 105Z" fill="#efcb38"/>
-                <path d="M35 78L111 47L187 78L179 94L111 118L43 94Z" fill="#e64f4f"/>
-                <path d="M20 57Q18 42 35 34L96 8Q111 2 126 8L187 34Q204 42 201 57L193 75Q188 83 177 79L111 55L44 79Q32 83 27 74Z" fill="#f3c873" stroke="#d98525" stroke-width="6"/>
-                <path d="M38 43L105 17Q112 14 120 17L183 43" fill="none" stroke="#ffe4a9" stroke-width="7" stroke-linecap="round" opacity=".75"/>
+                <path d="M24 128Q22 117 36 112H207Q220 116 218 128L213 151Q211 163 197 164H40Q27 162 27 151Z" fill="#d98025"/>
+                <path d="M31 126Q30 119 41 117H202Q211 119 210 127L206 147Q205 155 195 156H43Q34 155 34 147Z" fill="#f5c86f"/>
+                <path d="M27 112Q42 100 58 111T89 109T121 111T153 108T187 111T217 107L211 128H32Z" fill="#73b847"/>
+                <path d="M35 100Q54 91 73 101T111 99T150 101T190 98T216 103L209 119H31Z" fill="#ef9bae"/>
+                <circle cx="68" cy="99" r="13" fill="#e84c45"/><circle cx="119" cy="99" r="13" fill="#e84c45"/><circle cx="173" cy="99" r="13" fill="#e84c45"/>
+                <path d="M29 84H215L207 105H151L140 119L127 105H38Z" fill="#f6d04b"/>
+                <path d="M22 72Q20 53 37 40L62 21Q70 15 82 15H178Q193 15 201 27L217 51Q223 61 216 73L207 87H33Q24 84 22 72Z" fill="#d98025"/>
+                <path d="M29 68Q28 55 41 45L66 27Q73 22 83 22H175Q186 22 192 31L209 55Q213 61 208 70L202 78H38Q30 76 29 68Z" fill="#f6cf7b"/>
+                <path d="M45 52Q82 29 119 30T194 50" fill="none" stroke="#ffe7ad" stroke-width="8" stroke-linecap="round" opacity=".8"/>
+                <g fill="#c88a38" opacity=".65"><ellipse cx="83" cy="38" rx="3" ry="6" transform="rotate(-26 83 38)"/><ellipse cx="123" cy="31" rx="3" ry="6" transform="rotate(20 123 31)"/><ellipse cx="163" cy="38" rx="3" ry="6" transform="rotate(-18 163 38)"/></g>
               </g>
             </svg>
           </div>
