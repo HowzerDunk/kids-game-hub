@@ -27,6 +27,7 @@ export function mountSquishTheBugs(root) {
         <div class="picnic" data-picnic>
           <div class="sky-sparkle sparkle-one" aria-hidden="true">✦</div>
           <div class="sky-sparkle sparkle-two" aria-hidden="true">✦</div>
+          <div class="picnic-blanket" aria-hidden="true"></div>
           <div class="sandwich" data-sandwich aria-label="The picnic sandwich"><span>🥪</span><small>Yummy!</small></div>
           <p class="tap-hint" data-hint>Tap the bugs!</p>
           <div class="wave-announcement" data-announcement aria-live="polite"></div>
@@ -82,8 +83,14 @@ export function mountSquishTheBugs(root) {
     element.className = "bug";
     element.setAttribute("aria-label", "Squish bug");
     element.innerHTML = '<span aria-hidden="true">🐞</span>';
-    const bug = { element, x: 108, speed: waveSettings(wave).speed * (0.9 + Math.random() * 0.2) };
-    element.style.top = `${22 + Math.random() * 58}%`;
+    const bug = {
+      element,
+      x: 108,
+      y: 18 + Math.random() * 62,
+      phase: Math.random() * Math.PI * 2,
+      speed: waveSettings(wave).speed * (0.9 + Math.random() * 0.2),
+    };
+    element.style.top = `${bug.y}%`;
     element.addEventListener("pointerdown", (event) => {
       event.preventDefault();
       if (!running || !bugs.includes(bug)) return;
@@ -133,6 +140,7 @@ export function mountSquishTheBugs(root) {
       bugs.slice().forEach((bug) => {
         bug.x -= bug.speed * elapsed / 1000;
         bug.element.style.left = `${bug.x}%`;
+        bug.element.style.top = `${bug.y + Math.sin(time / 125 + bug.phase) * 1.4}%`;
         if (bug.x <= 16) {
           removeBug(bug, false);
           damageSandwich();
