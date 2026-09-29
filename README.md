@@ -1,4 +1,4 @@
-# Mimi's Game Garden
+# Esme's Playground
 
 A mobile-first, account-free collection of cheerful browser games for a child to play on iPhone, Android, tablet, or desktop. The first game is **Memory Garden**, a matching game with four difficulty levels and favorite-character cards.
 

@@ -1,4 +1,4 @@
-# Kids Game Hub
+# Esme's Playground
 
 This is a mobile-first children's game website made primarily for the project owner's niece.
 
