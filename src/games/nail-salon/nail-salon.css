@@ -2,8 +2,8 @@
   height: calc(var(--app-viewport-height) - var(--game-header-height));
   min-height: 0;
   overflow: hidden;
-  color: #513853;
-  background: #fff3f7;
+  color: #4d3850;
+  background: #f9f1f4;
   font-family: "DM Sans", sans-serif;
   user-select: none;
   -webkit-user-select: none;
@@ -19,57 +19,72 @@
 
 .salon-hand-panel {
   position: relative;
-  display: grid;
-  grid-template-rows: auto minmax(0, 1fr);
   min-height: 0;
   overflow: hidden;
   background:
     radial-gradient(circle at 12% 20%, #fff 0 5px, transparent 6px),
     radial-gradient(circle at 88% 34%, #fff 0 4px, transparent 5px),
-    linear-gradient(145deg, #ffeaf1, #eadfff 58%, #d9f5f2);
+    linear-gradient(145deg, #ffedf3, #eee6fa 57%, #e0f4f2);
 }
 
 .salon-heading {
-  position: relative;
+  position: absolute;
   z-index: 4;
+  top: 9px;
+  left: max(10px, env(safe-area-inset-left));
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 8px max(12px, env(safe-area-inset-right)) 2px max(12px, env(safe-area-inset-left));
+  padding: 7px 11px;
+  border: 1px solid #fff9;
+  border-radius: 18px;
+  background: #fffbedcc;
+  box-shadow: 0 5px 18px #72516818;
+  backdrop-filter: blur(8px);
 }
 
-.salon-heading > span { font-size: clamp(28px, 7vw, 42px); }
-.salon-heading div { display: grid; line-height: 1.05; }
-.salon-heading strong { font-family: "Fredoka", sans-serif; font-size: clamp(20px, 5vw, 29px); }
-.salon-heading small { color: #8b6588; font-size: clamp(11px, 3vw, 15px); font-weight: 800; }
-
-.salon-hand-wrap {
-  position: relative;
+.salon-heading-mark {
   display: grid;
-  min-height: 0;
-  place-items: end center;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  background: #e97d9e;
+  font-size: 16px;
 }
 
+.salon-heading div { display: grid; line-height: 1.05; }
+.salon-heading strong { font-family: "Fredoka", sans-serif; font-size: clamp(17px, 4.6vw, 22px); }
+.salon-heading small { margin-top: 3px; color: #8d6f85; font-size: 10px; font-weight: 800; }
+
+.salon-hand-wrap { display: grid; width: 100%; height: 100%; min-height: 0; place-items: end center; }
 .salon-hand {
   display: block;
-  width: min(96%, 490px);
+  width: min(98%, 510px);
   height: 100%;
   min-height: 0;
   overflow: visible;
-  filter: drop-shadow(0 6px 8px #70485a24);
+  filter: drop-shadow(0 7px 9px #70485a20);
   touch-action: manipulation;
 }
 
-.hand-model { fill: url("#salon-skin"); stroke: #8f4f44; stroke-width: 6; stroke-linejoin: round; filter: url("#hand-shadow"); }
-.hand-highlight { fill: none; stroke: #efb18d; stroke-width: 16; stroke-linecap: round; opacity: .3; }
-.hand-knuckle { fill: none; stroke: #9d5548; stroke-width: 6; stroke-linecap: round; opacity: .34; }
-.nail-hit { fill: transparent; pointer-events: all; }
-.nail-shadow { fill: #98584f; opacity: .42; }
-.nail-polish { stroke: #8d4d58; stroke-width: 4; transition: fill .16s ease, transform .16s ease; }
-.nail-shine { fill: none; stroke: #fff; stroke-width: 7; stroke-linecap: round; opacity: .58; }
+.hand-model { fill: url("#salon-skin"); stroke: #8e514b; stroke-width: 5; stroke-linejoin: round; filter: url("#hand-shadow"); }
+.hand-highlight { fill: none; stroke: #efb28f; stroke-width: 14; stroke-linecap: round; opacity: .32; }
+.hand-knuckle { fill: none; stroke: #a65f54; stroke-width: 5; stroke-linecap: round; opacity: .38; }
 .salon-nail { cursor: pointer; outline: none; touch-action: manipulation; }
-.salon-nail.is-selected .nail-shadow { fill: #ffd85f; opacity: 1; stroke: #fff; stroke-width: 7; }
-.salon-nail:focus-visible .nail-hit { fill: #fff5; stroke: #4d8fc4; stroke-width: 6; }
+.nail-hit { fill: transparent; pointer-events: all; }
+.nail-selection { fill: none; stroke: transparent; stroke-width: 11; }
+.nail-polish { stroke: #74474f; stroke-width: 3; stroke-linejoin: round; transition: fill .16s ease; }
+.nail-shine { fill: none; stroke: #fff; stroke-width: 4; stroke-linecap: round; opacity: .62; }
+.salon-nail.is-selected .nail-selection { stroke: #ffd968; }
+.salon-nail.is-selected .nail-polish { stroke: #fff; stroke-width: 4; }
+.salon-nail:focus-visible .nail-hit { fill: #fff4; stroke: #438bc1; stroke-width: 5; }
+.salon-hand.is-waiting .salon-nail .nail-polish { animation: nail-invite 1.8s ease-in-out infinite; }
+.salon-hand.is-waiting .salon-nail:nth-child(2) .nail-polish { animation-delay: .1s; }
+.salon-hand.is-waiting .salon-nail:nth-child(3) .nail-polish { animation-delay: .2s; }
+.salon-hand.is-waiting .salon-nail:nth-child(4) .nail-polish { animation-delay: .3s; }
+.salon-hand.is-waiting .salon-nail:nth-child(5) .nail-polish { animation-delay: .4s; }
 .salon-nail.just-painted .nail-polish,
 .salon-nail.just-painted .nail-shine,
 .salon-nail.just-painted .nail-art-mark,
@@ -79,95 +94,79 @@
   animation: nail-pop .3s ease-out;
 }
 .nail-art-mark { color: #fff6b0; pointer-events: none; }
-.nail-symbol { fill: #fff6b0; font: 800 40px/1 sans-serif; text-anchor: middle; dominant-baseline: middle; }
-.nail-character { font: 39px/1 "Apple Color Emoji", "Segoe UI Emoji", sans-serif; text-anchor: middle; dominant-baseline: middle; pointer-events: none; }
-
-.salon-pointer {
-  position: absolute;
-  z-index: 5;
-  top: 23%;
-  left: 51%;
-  font-size: clamp(34px, 10vw, 58px);
-  filter: drop-shadow(0 3px 2px #5e3c5433);
-  animation: salon-point 1.2s ease-in-out infinite;
-  pointer-events: none;
-}
-.salon-pointer.is-hidden { display: none; }
+.nail-symbol { fill: #fff6b0; font: 800 25px/1 sans-serif; text-anchor: middle; dominant-baseline: middle; }
+.nail-character { font: 24px/1 "Apple Color Emoji", "Segoe UI Emoji", sans-serif; text-anchor: middle; dominant-baseline: middle; pointer-events: none; }
 
 .salon-controls {
   position: relative;
   z-index: 8;
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  grid-template-areas: "step tabs reset" "options options options";
-  gap: 7px;
-  padding: 8px max(9px, env(safe-area-inset-right)) max(9px, env(safe-area-inset-bottom)) max(9px, env(safe-area-inset-left));
-  border-top: 4px solid #fff;
-  background: #fff9ee;
-  box-shadow: 0 -7px 20px #70485a1f;
+  grid-template-columns: minmax(0, 1fr) 52px;
+  grid-template-areas: "tabs reset" "options options";
+  gap: 8px;
+  padding: 9px max(10px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left));
+  border-top: 1px solid #eadcdf;
+  background: #fffaf2;
+  box-shadow: 0 -8px 24px #6d4b6014;
 }
 
-.salon-step { grid-area: step; display: flex; align-items: center; gap: 3px; padding: 0 5px; font-size: 20px; }
-.step-badge { display: grid; width: 21px; height: 21px; place-items: center; border-radius: 50%; color: #fff; background: #ed6b78; font-size: 12px; font-weight: 900; }
-.step-arrow { color: #a27a96; font-size: 25px; font-weight: 900; }
+.salon-tabs {
+  grid-area: tabs;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+  min-width: 0;
+  padding: 3px;
+  border-radius: 17px;
+  background: #f0e7ec;
+}
+.salon-tabs button, .salon-options button, .salon-reset { min-height: 46px; border: 0; color: #594257; cursor: pointer; touch-action: manipulation; }
+.salon-tabs button { display: flex; align-items: center; justify-content: center; gap: 5px; min-width: 0; padding: 4px 5px; border-radius: 14px; background: transparent; }
+.salon-tabs button span { font-size: 20px; line-height: 1; }
+.salon-tabs button small { overflow: hidden; font-size: 10px; font-weight: 900; text-overflow: ellipsis; white-space: nowrap; }
+.salon-tabs button.is-selected { color: #ad4f70; background: #fff; box-shadow: 0 2px 7px #67435917; }
 
-.salon-tabs { grid-area: tabs; display: flex; justify-content: center; gap: 6px; min-width: 0; }
-.salon-tabs button,
-.salon-options button,
-.salon-reset { min-height: 48px; border: 3px solid transparent; cursor: pointer; touch-action: manipulation; }
-.salon-tabs button { display: grid; grid-template-columns: auto auto; align-items: center; gap: 4px; min-width: 66px; padding: 3px 7px; border-radius: 15px; color: #513853; background: #eee5ec; }
-.salon-tabs button span { font-size: 23px; }
-.salon-tabs button small { font-size: 9px; font-weight: 900; }
-.salon-tabs button.is-selected { border-color: #efa35d; background: #fff; box-shadow: 0 3px #d7b47d; transform: translateY(-1px); }
-
-.salon-options { grid-area: options; display: flex; justify-content: center; gap: 7px; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.salon-options { grid-area: options; display: flex; justify-content: center; gap: 6px; min-width: 0; overflow-x: auto; scrollbar-width: none; }
 .salon-options::-webkit-scrollbar { display: none; }
-.salon-options button { flex: 0 0 54px; display: grid; width: 54px; height: 54px; place-items: center; padding: 4px; border-radius: 17px; background: #f4e9ee; box-shadow: 0 3px #d9c2ca; }
-.salon-options button i { display: block; width: 37px; height: 37px; border: 3px solid #fff; border-radius: 50%; background: var(--swatch); box-shadow: inset 0 0 0 1px #744d6526; }
-.salon-options button span { font-size: 28px; line-height: 1; }
-.salon-options button.is-selected { border-color: #ed6b78; background: #fff; box-shadow: 0 4px #c95061; transform: translateY(-2px); }
-.salon-options button:disabled { cursor: default; filter: grayscale(.7); opacity: .38; }
+.salon-options button { flex: 0 0 46px; display: grid; width: 46px; height: 46px; place-items: center; padding: 3px; border: 3px solid transparent; border-radius: 50%; background: #f5edef; }
+.salon-options button i { display: block; width: 34px; height: 34px; border: 2px solid #fff; border-radius: 50%; background: var(--swatch); box-shadow: inset 0 0 0 1px #744d6520; }
+.salon-options button span { font-size: 25px; line-height: 1; }
+.salon-options button.is-selected { border-color: #e9799b; background: #fff; box-shadow: 0 2px 8px #b44e7224; }
+.salon-options button:disabled { cursor: default; filter: grayscale(.55); opacity: .42; }
 
-.salon-reset { grid-area: reset; display: flex; align-items: center; gap: 4px; padding: 4px 10px; border-color: #fff; border-radius: 15px; color: #513853; background: #f9e0de; box-shadow: 0 3px #d7aaa7; font-size: 11px; font-weight: 900; }
-.salon-reset span { font-size: 23px; }
-.salon-tabs button:focus-visible, .salon-options button:focus-visible, .salon-reset:focus-visible { outline: 4px solid #4d8fc4; outline-offset: 2px; }
+.salon-reset { grid-area: reset; display: grid; place-items: center; padding: 2px; border-radius: 16px; background: #f6e8e8; }
+.salon-reset span { font-size: 22px; line-height: 1; }
+.salon-reset small { font-size: 8px; font-weight: 900; }
+.salon-tabs button:focus-visible, .salon-options button:focus-visible, .salon-reset:focus-visible { outline: 4px solid #438bc1; outline-offset: 2px; }
 
-@keyframes salon-point { 0%, 100% { transform: translate(-4px, 8px) rotate(-12deg); } 50% { transform: translate(5px, -4px) rotate(-5deg); } }
-@keyframes nail-pop { 0%, 100% { transform: scale(1); } 45% { transform: scale(1.16); } }
-
-@media (max-width: 420px) {
-  .salon-controls { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "tabs reset" "options options"; }
-  .salon-step { display: none; }
-  .salon-reset { width: 48px; justify-content: center; padding: 3px; font-size: 0; }
-  .salon-tabs button { min-width: 64px; }
-}
+@keyframes nail-invite { 0%, 65%, 100% { filter: brightness(1); } 78% { filter: brightness(1.16) drop-shadow(0 0 4px #fff); } }
+@keyframes nail-pop { 0%, 100% { transform: scale(1); } 45% { transform: scale(1.14); } }
 
 @media (orientation: landscape) {
-  .nail-salon-shell { grid-template-columns: minmax(0, 1.15fr) minmax(300px, .85fr); grid-template-rows: minmax(0, 1fr); }
-  .salon-heading { position: absolute; top: 0; left: 0; }
+  .nail-salon-shell { grid-template-columns: minmax(0, 1.2fr) minmax(330px, .8fr); grid-template-rows: minmax(0, 1fr); }
   .salon-hand { width: auto; max-width: 100%; height: 100%; }
-  .salon-controls { grid-template-columns: 1fr auto; grid-template-areas: "step reset" "tabs tabs" "options options"; align-content: center; padding-top: max(10px, env(safe-area-inset-top)); border-top: 0; border-left: 4px solid #fff; }
-  .salon-step { justify-content: center; }
-  .salon-tabs { display: grid; grid-template-columns: repeat(3, 1fr); }
-  .salon-tabs button { grid-template-columns: 1fr; }
-  .salon-tabs button small { font-size: 10px; }
-  .salon-options { display: grid; grid-template-columns: repeat(3, 58px); align-content: start; max-height: min(230px, 45vh); padding: 4px; overflow-y: auto; }
-  .salon-options button { width: 58px; height: 58px; }
+  .salon-controls {
+    grid-template-columns: minmax(0, 1fr) 54px;
+    align-content: center;
+    gap: 12px 8px;
+    padding: max(12px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) 14px;
+    border-top: 0;
+    border-left: 1px solid #eadcdf;
+  }
+  .salon-options { flex-wrap: wrap; max-width: 260px; margin: 0 auto; overflow: visible; }
+  .salon-options button { flex-basis: 50px; width: 50px; height: 50px; }
 }
 
 @media (orientation: landscape) and (max-height: 520px) {
-  .salon-heading small { display: none; }
-  .salon-heading strong { font-size: 19px; }
-  .salon-controls { gap: 5px; }
-  .salon-step { display: none; }
-  .salon-controls { grid-template-areas: "tabs reset" "options options"; }
-  .salon-tabs button { min-height: 44px; grid-template-columns: auto auto; }
-  .salon-options { grid-template-columns: repeat(4, 52px); max-height: min(170px, 46vh); }
-  .salon-options button { width: 52px; height: 52px; min-height: 52px; }
+  .salon-heading { top: 7px; transform: scale(.9); transform-origin: top left; }
+  .salon-controls { gap: 8px 6px; }
+  .salon-tabs button { min-height: 44px; }
+  .salon-options { max-width: 245px; }
+  .salon-options button { flex-basis: 46px; width: 46px; height: 46px; min-height: 46px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .salon-pointer,
+  .salon-hand.is-waiting .salon-nail .nail-polish,
   .salon-nail.just-painted .nail-polish,
   .salon-nail.just-painted .nail-shine,
   .salon-nail.just-painted .nail-art-mark,
