@@ -60,25 +60,27 @@
 
 .salon-hand-wrap { display: grid; width: 100%; height: 100%; min-height: 0; place-items: end center; }
 .salon-hand {
-  display: block;
-  width: min(98%, 510px);
-  height: 100%;
+  position: relative;
+  width: min(96%, 460px);
+  max-height: 100%;
+  aspect-ratio: 680 / 984;
   min-height: 0;
-  overflow: visible;
   filter: drop-shadow(0 7px 9px #70485a20);
   touch-action: manipulation;
 }
-
-.hand-model { fill: url("#salon-skin"); stroke: #8e514b; stroke-width: 5; stroke-linejoin: round; filter: url("#hand-shadow"); }
-.hand-highlight { fill: none; stroke: #efb28f; stroke-width: 14; stroke-linecap: round; opacity: .32; }
-.hand-knuckle { fill: none; stroke: #a65f54; stroke-width: 5; stroke-linecap: round; opacity: .38; }
+.salon-hand > img,
+.salon-nail-layer { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.salon-hand > img { object-fit: contain; pointer-events: none; -webkit-user-drag: none; }
+.salon-nail-layer { overflow: visible; }
 .salon-nail { cursor: pointer; outline: none; touch-action: manipulation; }
 .nail-hit { fill: transparent; pointer-events: all; }
 .nail-selection { fill: none; stroke: transparent; stroke-width: 11; }
-.nail-polish { stroke: #74474f; stroke-width: 3; stroke-linejoin: round; transition: fill .16s ease; }
+.nail-polish { stroke: #8a4f45; stroke-width: 2; stroke-linejoin: round; transition: fill .16s ease; }
+.salon-nail.is-clear .nail-polish,
+.salon-nail.is-clear .nail-shine { stroke: transparent; }
 .nail-shine { fill: none; stroke: #fff; stroke-width: 4; stroke-linecap: round; opacity: .62; }
 .salon-nail.is-selected .nail-selection { stroke: #ffd968; }
-.salon-nail.is-selected .nail-polish { stroke: #fff; stroke-width: 4; }
+.salon-nail.is-selected:not(.is-clear) .nail-polish { stroke: #fff; stroke-width: 3; }
 .salon-nail:focus-visible .nail-hit { fill: #fff4; stroke: #438bc1; stroke-width: 5; }
 .salon-hand.is-waiting .salon-nail .nail-polish { animation: nail-invite 1.8s ease-in-out infinite; }
 .salon-hand.is-waiting .salon-nail:nth-child(2) .nail-polish { animation-delay: .1s; }

@@ -1,11 +1,11 @@
 import "./nail-salon.css";
 
 const nailDefinitions = [
-  { id: "thumb", label: "Thumb", x: 655, y: 431, width: 31, height: 56, rotate: 34 },
-  { id: "pointer", label: "Pointer", x: 574, y: 159, width: 31, height: 54, rotate: 5 },
-  { id: "middle", label: "Middle", x: 458, y: 67, width: 34, height: 59, rotate: 1 },
-  { id: "ring", label: "Ring", x: 328, y: 146, width: 32, height: 56, rotate: -1 },
-  { id: "pinky", label: "Pinky", x: 166, y: 226, width: 28, height: 50, rotate: -7 },
+  { id: "thumb", label: "Thumb", x: 578, y: 440, width: 44, height: 78, rotate: 34 },
+  { id: "pointer", label: "Pointer", x: 419, y: 125, width: 44, height: 76, rotate: 2 },
+  { id: "middle", label: "Middle", x: 310, y: 63, width: 46, height: 84, rotate: 0 },
+  { id: "ring", label: "Ring", x: 199, y: 121, width: 44, height: 77, rotate: 0 },
+  { id: "pinky", label: "Pinky", x: 76, y: 236, width: 38, height: 66, rotate: -7 },
 ];
 
 const palettes = {
@@ -35,7 +35,7 @@ const palettes = {
   ],
 };
 
-const blankNail = () => ({ color: "#fff7eb", design: "none", character: "none" });
+const blankNail = () => ({ color: "transparent", design: "none", character: "none" });
 
 function designMarkup(nail, width, height) {
   if (nail.character !== "none") {
@@ -62,7 +62,7 @@ function nailMarkup(definition, nail, selected) {
   const { x, y, width, height, rotate = 0 } = definition;
   const nailPath = `M 0 -${height / 2}C ${width * 0.3} -${height / 2} ${width * 0.46} -${height * 0.34} ${width * 0.46} -${height * 0.12}L ${width * 0.42} ${height * 0.27}C ${width * 0.3} ${height * 0.45} 0 ${height * 0.5} -${width * 0.3} ${height * 0.45}C -${width * 0.42} ${height * 0.32} -${width * 0.46} ${height * 0.12} -${width * 0.46} -${height * 0.12}C -${width * 0.46} -${height * 0.34} -${width * 0.3} -${height / 2} 0 -${height / 2}Z`;
   return `
-    <g class="salon-nail${selected ? " is-selected" : ""}" data-nail="${definition.id}" role="button" tabindex="0" aria-label="${definition.label}${selected ? ", selected" : ""}" aria-pressed="${selected}" transform="translate(${x} ${y}) rotate(${rotate})">
+    <g class="salon-nail${selected ? " is-selected" : ""}${nail.color === "transparent" ? " is-clear" : ""}" data-nail="${definition.id}" role="button" tabindex="0" aria-label="${definition.label}${selected ? ", selected" : ""}" aria-pressed="${selected}" transform="translate(${x} ${y}) rotate(${rotate})">
       <ellipse class="nail-hit" rx="${Math.max(34, width * 0.9)}" ry="${Math.max(42, height * 0.72)}"/>
       <path class="nail-selection" d="${nailPath}"/>
       <path class="nail-polish" d="${nailPath}" fill="${nail.color}"/>
@@ -85,16 +85,12 @@ export function mountNailSalon(root) {
           <div><strong>Nail Salon</strong><small data-instruction>Choose a nail</small></div>
         </div>
         <div class="salon-hand-wrap">
-          <svg class="salon-hand" viewBox="105 10 600 790" role="group" aria-label="Hand with five selectable fingernails" data-hand>
-            <defs>
-              <linearGradient id="salon-skin" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d99068"/><stop offset=".55" stop-color="#c87857"/><stop offset="1" stop-color="#ae6048"/></linearGradient>
-              <filter id="hand-shadow" x="-30%" y="-20%" width="160%" height="160%"><feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#6f3f4d" flood-opacity=".24"/></filter>
-            </defs>
-            <path class="hand-model" d="M215 790C194 724 170 657 178 590L126 255C120 218 139 192 165 188C193 184 212 207 216 241L249 459C252 474 272 471 273 455L280 160C280 125 302 104 330 105C358 106 375 129 372 164L362 447C362 463 383 465 386 448L405 80C407 42 431 21 460 24C490 27 506 52 502 89L470 453C469 470 491 473 495 455L523 167C526 133 550 115 577 120C605 125 620 149 615 183L565 492C563 507 581 514 590 501L625 433C642 401 672 389 691 405C710 422 708 450 688 477L617 585C590 626 560 660 522 692L490 721L482 790Z"/>
-            <path class="hand-highlight" d="M242 641C295 672 367 678 438 657C503 638 555 601 589 550"/>
-            <path class="hand-knuckle" d="M151 326Q166 318 181 323M303 318Q328 311 350 318M417 311Q442 304 466 313M530 326Q552 320 572 331M610 480Q628 481 643 493"/>
-            <g data-nail-layer></g>
-          </svg>
+          <div class="salon-hand" role="group" aria-label="Hand with five selectable fingernails" data-hand>
+            <img src="${import.meta.env.BASE_URL}games/nail-salon/hand-base.png" alt="" draggable="false">
+            <svg class="salon-nail-layer" viewBox="0 0 680 984">
+              <g data-nail-layer></g>
+            </svg>
+          </div>
         </div>
       </section>
 
