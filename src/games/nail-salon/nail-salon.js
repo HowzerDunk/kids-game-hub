@@ -1,11 +1,18 @@
 import "./nail-salon.css";
 
+// Nail outlines traced in the hand artwork's 680 × 984 coordinate system.
+// Color and character art share these exact silhouettes.
 const nailDefinitions = [
-  { id: "thumb", label: "Thumb", x: 578, y: 440, width: 44, height: 78, rotate: 34 },
-  { id: "pointer", label: "Pointer", x: 419, y: 125, width: 44, height: 76, rotate: 2 },
-  { id: "middle", label: "Middle", x: 310, y: 63, width: 46, height: 84, rotate: 0 },
-  { id: "ring", label: "Ring", x: 199, y: 121, width: 44, height: 77, rotate: 0 },
-  { id: "pinky", label: "Pinky", x: 76, y: 236, width: 38, height: 66, rotate: -7 },
+  { id: "thumb", label: "Thumb", x: 578, y: 440, width: 72, height: 82,
+    outline: "M590 405 C603 405 613 412 609 425 C602 442 585 462 576 473 C568 484 550 474 548 464 C547 452 566 425 577 413 C581 409 585 406 590 405 Z" },
+  { id: "pointer", label: "Pointer", x: 419, y: 126, width: 56, height: 84,
+    outline: "M403 91 C413 85 432 88 441 98 C447 109 439 148 435 157 C430 170 407 169 399 157 C391 145 395 109 398 99 C399 95 400 93 403 91 Z" },
+  { id: "middle", label: "Middle", x: 306, y: 65, width: 56, height: 90,
+    outline: "M289 27 C300 20 321 23 327 32 C335 44 330 85 327 96 C323 112 292 111 286 99 C279 87 281 46 284 35 C285 31 286 29 289 27 Z" },
+  { id: "ring", label: "Ring", x: 199, y: 123, width: 52, height: 84,
+    outline: "M182 88 C191 82 210 84 218 92 C223 103 220 143 216 154 C212 167 189 166 181 155 C173 143 176 108 177 99 C178 94 179 90 182 88 Z" },
+  { id: "pinky", label: "Pinky", x: 75, y: 236, width: 48, height: 74,
+    outline: "M60 207 C69 201 82 203 87 213 C92 225 97 248 93 259 C90 272 71 272 65 263 C58 252 53 224 55 215 C56 211 57 209 60 207 Z" },
 ];
 
 const palettes = {
@@ -61,14 +68,16 @@ function designMarkup(nail, width, height, clipId) {
 
 function nailMarkup(definition, nail, selected, highlighted) {
   const { x, y, width, height, rotate = 0 } = definition;
-  const nailPath = `M 0 -${height / 2}C ${width * 0.3} -${height / 2} ${width * 0.46} -${height * 0.34} ${width * 0.46} -${height * 0.12}L ${width * 0.42} ${height * 0.27}C ${width * 0.3} ${height * 0.45} 0 ${height * 0.5} -${width * 0.3} ${height * 0.45}C -${width * 0.42} ${height * 0.32} -${width * 0.46} ${height * 0.12} -${width * 0.46} -${height * 0.12}C -${width * 0.46} -${height * 0.34} -${width * 0.3} -${height / 2} 0 -${height / 2}Z`;
+  const nailPath = definition.outline;
+  // Translate the traced outline to nail-local coordinates, shared by the clip and fill.
+  const outlineTransform = `translate(${-x} ${-y})`;
   return `
     <g class="salon-nail${highlighted ? " is-selected" : ""}${nail.color === "transparent" ? " is-clear" : ""}" data-nail="${definition.id}" role="button" tabindex="0" aria-label="${definition.label}${selected ? ", selected" : ""}" aria-pressed="${selected}" transform="translate(${x} ${y}) rotate(${rotate})">
       <ellipse class="nail-hit" rx="${Math.max(34, width * 0.9)}" ry="${Math.max(42, height * 0.72)}"/>
-      <path class="nail-selection" d="${nailPath}"/>
-      <path class="nail-polish" d="${nailPath}" fill="${nail.color}"/>
-      <path class="nail-shine" d="M-${width * 0.2} -${height * 0.24}Q-${width * 0.05} -${height * 0.36} ${width * 0.1} -${height * 0.29}"/>
-      <defs><clipPath id="salon-clip-${definition.id}"><path d="${nailPath}"/></clipPath></defs>
+      <path class="nail-selection" d="${nailPath}" transform="${outlineTransform}"/>
+      <path class="nail-polish" d="${nailPath}" transform="${outlineTransform}" fill="${nail.color}"/>
+      <path class="nail-shine" clip-path="url(#salon-clip-${definition.id})" d="M-${width * 0.2} -${height * 0.24}Q-${width * 0.05} -${height * 0.36} ${width * 0.1} -${height * 0.29}"/>
+      <defs><clipPath id="salon-clip-${definition.id}"><path d="${nailPath}" transform="${outlineTransform}"/></clipPath></defs>
       ${designMarkup(nail, width, height, `salon-clip-${definition.id}`)}
     </g>`;
 }
