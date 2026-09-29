@@ -25,6 +25,11 @@ export function mountSquishTheBugs(root) {
       </section>
       <section class="bugs-game" aria-label="Squish the bugs game">
         <div class="picnic" data-picnic>
+          <div class="cloud cloud-one" aria-hidden="true"></div><div class="cloud cloud-two" aria-hidden="true"></div>
+          <div class="flower-patch" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          <div class="picnic-props" aria-hidden="true"><span class="basket"></span><span class="juice-box">☀</span></div>
+          <div class="ant-trails" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          <div class="anthill" aria-hidden="true"><span></span></div><div class="bush" aria-hidden="true"><i></i><i></i><i></i></div>
           <div class="wave-display"><span aria-hidden="true">🌼</span><strong data-wave>1</strong></div>
           <div class="picnic-blanket" aria-hidden="true"></div>
           <div class="sandwich" data-sandwich aria-label="The picnic sandwich, five bites left">
@@ -43,12 +48,14 @@ export function mountSquishTheBugs(root) {
                 <g fill="#c88a38" opacity=".65"><ellipse cx="83" cy="38" rx="3" ry="6" transform="rotate(-26 83 38)"/><ellipse cx="123" cy="31" rx="3" ry="6" transform="rotate(20 123 31)"/><ellipse cx="163" cy="38" rx="3" ry="6" transform="rotate(-18 163 38)"/></g>
               </g>
             </svg>
+            <div class="crumbs" aria-hidden="true"><i></i><i></i><i></i><i></i></div><div class="chomp-burst" aria-hidden="true">CHOMP!</div><div class="sandwich-celebration" aria-hidden="true">✦ ✨ ✦</div>
           </div>
           <div class="wave-announcement" data-announcement aria-live="polite"></div>
+          <button class="start-picnic" data-start aria-label="Start Squish the Bugs"><span aria-hidden="true">▶</span></button>
         </div>
       </section>
       <div class="bugs-game-over" data-game-over hidden role="dialog" aria-modal="true" aria-labelledby="game-over-title">
-        <div class="game-over-card"><span aria-hidden="true">🥪</span><p>OH NO!</p><h2 id="game-over-title">The bugs ate the picnic!</h2><button data-replay>Play again! ✨</button></div>
+        <div class="game-over-card"><span aria-hidden="true">🥪</span><p>OH NO!</p><h2 id="game-over-title">The bugs ate the picnic!</h2><button data-replay aria-label="Play again"><span aria-hidden="true">↻</span><small>Play again!</small></button></div>
       </div>
     </main>`;
 
@@ -56,6 +63,8 @@ export function mountSquishTheBugs(root) {
   const picnic = $("[data-picnic]");
   const waveEl = $("[data-wave]");
   const announcementEl = $("[data-announcement]");
+  const sandwich = $("[data-sandwich]");
+  const startButton = $("[data-start]");
   const portraitPhone = window.matchMedia("(orientation: portrait) and (max-width: 700px)");
   let wave = 0;
   let health = STARTING_HEALTH;
@@ -123,8 +132,8 @@ export function mountSquishTheBugs(root) {
     health -= 1;
     renderSandwich();
     playSound("chomp");
-    $("[data-sandwich]").classList.remove("is-hit");
-    requestAnimationFrame(() => $("[data-sandwich]").classList.add("is-hit"));
+    sandwich.classList.remove("is-hit");
+    requestAnimationFrame(() => sandwich.classList.add("is-hit"));
     if (health <= 0) endGame();
   }
 
@@ -182,6 +191,8 @@ export function mountSquishTheBugs(root) {
     running = false;
     announce("✨ Great! ✨");
     playSound("cheer");
+    sandwich.classList.remove("is-happy");
+    requestAnimationFrame(() => sandwich.classList.add("is-happy"));
     waveTimer = window.setTimeout(() => { running = true; startWave(); }, BETWEEN_WAVES_MS);
   }
 
@@ -211,7 +222,14 @@ export function mountSquishTheBugs(root) {
     animationFrame = requestAnimationFrame(tick);
   }
 
-  function reset() {
+  function begin() {
+    ensureAudio();
+    startButton.hidden = true;
+    running = true;
+    startWave();
+  }
+
+  function reset(playNow = true) {
     clearTimeout(spawnTimer);
     clearTimeout(waveTimer);
     bugs.forEach((bug) => bug.element.remove());
@@ -220,12 +238,15 @@ export function mountSquishTheBugs(root) {
     health = STARTING_HEALTH;
     renderSandwich();
     $("[data-game-over]").hidden = true;
-    running = true;
-    startWave();
+    sandwich.classList.remove("is-hit", "is-happy");
+    running = false;
+    startButton.hidden = playNow;
+    if (playNow) begin();
   }
 
   $("[data-replay]").addEventListener("click", () => { ensureAudio(); reset(); });
-  reset();
+  startButton.addEventListener("click", () => begin());
+  reset(false);
   animationFrame = requestAnimationFrame(tick);
   return () => { clearTimeout(spawnTimer); clearTimeout(waveTimer); cancelAnimationFrame(animationFrame); audioContext?.close(); };
 }
