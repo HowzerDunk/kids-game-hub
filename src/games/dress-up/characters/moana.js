@@ -97,11 +97,11 @@ export const moanaCharacter = {
       label: "Accessories",
       icon: "🕶️",
       items: [
-        item("sunglasses", "Sunglasses", "🕶️", "#46395f", '<g class="outfit-piece" fill="#46395f" stroke="#241d36" stroke-width="5"><path d="M313 143Q343 132 373 145Q371 180 343 183Q315 180 313 143Z"/><path d="M395 145Q425 132 455 143Q453 180 425 183Q397 180 395 145Z"/><path d="M373 151Q384 144 395 151M313 150L286 144M455 150L482 144" fill="none"/></g>'),
+        item("sunglasses", "Sunglasses", "🕶️", "#46395f", '<g class="outfit-piece" fill="#57466f" fill-opacity=".86" stroke="#241d36" stroke-width="5"><path d="M320 121Q350 109 381 122Q379 158 351 161Q323 158 320 121Z"/><path d="M390 122Q421 109 451 121Q448 158 420 161Q392 158 390 122Z"/><path d="M381 128Q385 124 390 128M320 128L293 121M451 128L477 120" fill="none" stroke-linecap="round"/></g>'),
         item("heart-necklace", "Heart necklace", "💖", "#ef7390", '<g class="outfit-piece" fill="none" stroke="#f4d06f" stroke-width="6"><path d="M340 274Q384 317 428 274"/></g><path d="M384 315C371 299 351 315 384 343C417 315 397 299 384 315Z" fill="#ef7390" stroke="#87435b" stroke-width="4"/>'),
         item("flower-lei", "Flower necklace", "🌺", "#f58ca6", '<g class="outfit-piece" fill="#f58ca6" stroke="#fff1ae" stroke-width="4"><circle cx="331" cy="279" r="14"/><circle cx="353" cy="305" r="14"/><circle cx="384" cy="319" r="14"/><circle cx="415" cy="305" r="14"/><circle cx="437" cy="279" r="14"/></g>'),
         item("hair-flower", "Hair flower", "🌼", "#f5cc54", '<g class="outfit-piece" fill="#fff5b2" stroke="#df8c47" stroke-width="4"><circle cx="512" cy="166" r="18"/><circle cx="538" cy="166" r="18"/><circle cx="525" cy="144" r="18"/><circle cx="525" cy="188" r="18"/><circle cx="525" cy="166" r="11" fill="#f5a44d"/></g>'),
-        item("star-purse", "Star purse", "⭐", "#8d73dc", '<g class="outfit-piece" fill="none" stroke="#8d73dc" stroke-width="9"><path d="M470 365Q530 432 525 548"/></g><path d="M525 539l13 27 30 4-22 21 6 30-27-15-27 15 6-30-22-21 30-4Z" fill="#ffd85e" stroke="#8d73dc" stroke-width="5"/>'),
+        item("star-purse", "Star purse", "👜", "#8d73dc", '<g class="outfit-piece" stroke-linecap="round" stroke-linejoin="round"><path d="M316 290Q446 390 525 572" fill="none" stroke="#8d73dc" stroke-width="13"/><path d="M474 563Q526 548 578 563L591 657Q530 678 461 657Z" fill="#8d73dc" stroke="#5742a4" stroke-width="6"/><path d="M474 565Q526 603 578 565L575 596Q526 626 477 596Z" fill="#a897ef" stroke="#5742a4" stroke-width="5"/><path d="M526 603l10 20 23 3-17 16 4 23-20-11-20 11 4-23-17-16 23-3Z" fill="#ffd85e" stroke="#fff3ad" stroke-width="4"/><circle cx="526" cy="581" r="6" fill="#ffd85e" stroke="none"/></g>'),
       ],
     },
   ],
