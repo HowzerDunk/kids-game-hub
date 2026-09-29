@@ -1,33 +1,28 @@
 const item = (id, name, preview, color, svg) => ({ id, name, preview, color, svg });
 
-const bottomUnderlayer = `
-  <defs><linearGradient id="moana-leg-tone" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#ca7b59"/><stop offset="1" stop-color="#c47552"/></linearGradient></defs>
-  <path fill="url(#moana-leg-tone)" d="M267 476Q384 490 501 476L512 712Q462 733 410 717L384 575L358 717Q306 733 256 712Z"/>`;
-
 const topShape = (fill, detail = "") => `
   <g class="outfit-piece" stroke="#6b4550" stroke-width="4" stroke-linejoin="round">
-    <path fill="${fill}" d="M339 251Q384 280 429 251Q465 250 493 276Q521 284 535 318L493 355L474 465Q384 481 294 465L275 355L233 318Q247 284 275 276Q303 250 339 251Z"/>
+    <path fill="${fill}" d="M339 250C310 247 282 254 260 273C244 287 234 303 228 321L278 357L299 460Q384 477 469 460L490 357L540 321C534 303 524 287 508 273C486 254 458 247 429 250Q384 286 339 250Z"/>
     ${detail}
   </g>`;
 
 const shortsShape = (fill, detail = "") => `
-  ${bottomUnderlayer}
   <g class="outfit-piece" stroke="#5c4a61" stroke-width="4" stroke-linejoin="round">
-    <path fill="${fill}" d="M286 477Q384 489 482 477L499 515L501 704Q455 719 409 704L384 566L359 704Q313 719 267 704L269 515Z"/>
-    <path d="M384 502V566" fill="none" opacity=".55"/>
+    <path fill="${fill}" d="M299 477Q384 489 469 477C484 505 497 536 501 568L502 720Q447 733 384 719Q321 733 266 720L267 568C271 536 284 505 299 477Z"/>
+    <path d="M384 503V719" fill="none" opacity=".55"/>
     ${detail}
   </g>`;
 
 const skirtShape = (fill, detail = "") => `
   <g class="outfit-piece" stroke="#6b4550" stroke-width="4" stroke-linejoin="round">
-    <path fill="${fill}" d="M279 477Q384 489 489 477L516 699Q384 741 252 699Z"/>
-    <path d="M286 498Q384 514 482 498" fill="none" stroke="#fff" stroke-width="8" opacity=".45"/>
+    <path fill="${fill}" d="M298 477Q384 489 470 477C482 516 496 558 501 610L512 728Q384 762 256 728L267 610C272 558 286 516 298 477Z"/>
+    <path d="M304 498Q384 511 464 498" fill="none" stroke="#fff" stroke-width="8" opacity=".45"/>
     ${detail}
   </g>`;
 
-const dressShape = (fill, detail = "", skirt = "M301 450Q384 471 467 450L548 786Q384 847 220 786Z") => `
+const dressShape = (fill, detail = "", skirt = "M302 450Q384 469 466 450C480 498 497 538 503 595L516 785Q384 831 252 785L265 595C271 538 288 498 302 450Z") => `
   <g class="outfit-piece" stroke="#68445b" stroke-width="4" stroke-linejoin="round">
-    <path fill="${fill}" d="M339 251Q384 280 429 251Q465 250 493 276Q521 284 535 318L493 355L472 452L463 488H305L296 452L275 355L233 318Q247 284 275 276Q303 250 339 251Z"/>
+    <path fill="${fill}" d="M339 250C310 247 282 254 260 273C244 287 234 303 228 321L278 357L298 450L305 488H463L470 450L490 357L540 321C534 303 524 287 508 273C486 254 458 247 429 250Q384 286 339 250Z"/>
     <path fill="${fill}" d="${skirt}"/>
     <path d="M303 467Q384 489 465 467" fill="none" stroke="#fff" stroke-width="10" opacity=".42"/>
     ${detail}
@@ -58,9 +53,9 @@ export const moanaCharacter = {
       icon: "👖",
       items: [
         item("hibiscus-skirt", "Flower skirt", "🌸", "#f58bb4", skirtShape("#f58bb4", '<g fill="#fff4b0" stroke="none"><circle cx="302" cy="611" r="15"/><circle cx="384" cy="653" r="15"/><circle cx="468" cy="588" r="15"/></g>')),
-        item("ocean-shorts", "Ocean shorts", "🐚", "#36b9ba", shortsShape("#36b9ba", '<path d="M276 548Q330 528 382 550T499 548" fill="none" stroke="#e9ffff" stroke-width="12" opacity=".75"/>')),
-        item("denim-shorts", "Blue shorts", "💙", "#5d91d8", shortsShape("#5d91d8", '<path d="M280 520H488M312 500Q318 548 350 550M456 500Q450 548 418 550" fill="none" stroke="#d7ecff" stroke-width="6"/>')),
-        item("sunshine-skirt", "Sunny skirt", "🌼", "#f5c94e", skirtShape("#f5c94e", '<path d="M270 568Q384 610 512 562M252 650Q384 696 528 642" fill="none" stroke="#fff4b0" stroke-width="12" opacity=".8"/>')),
+        item("ocean-shorts", "Ocean shorts", "🐚", "#36b9ba", shortsShape("#36b9ba", '<path d="M286 548Q334 530 382 550T482 548" fill="none" stroke="#e9ffff" stroke-width="12" opacity=".75"/>')),
+        item("denim-shorts", "Blue shorts", "💙", "#5d91d8", shortsShape("#5d91d8", '<path d="M290 520H478M312 500Q318 548 350 550M456 500Q450 548 418 550" fill="none" stroke="#d7ecff" stroke-width="6"/>')),
+        item("sunshine-skirt", "Sunny skirt", "🌼", "#f5c94e", skirtShape("#f5c94e", '<path d="M282 568Q384 604 486 568M272 646Q384 682 496 646" fill="none" stroke="#fff4b0" stroke-width="12" opacity=".8"/>')),
       ],
     },
     {
@@ -69,10 +64,10 @@ export const moanaCharacter = {
       icon: "👗",
       items: [
         item("sparkle-dress", "Sparkle dress", "✨", "#9b70d7", dressShape("#9b70d7", '<g fill="#fff5a8" stroke="none"><path d="M310 594l8 17 19 2-14 13 4 19-17-9-16 9 3-19-13-13 19-2z"/><path d="M437 686l7 14 16 2-12 11 3 16-14-8-14 8 3-16-12-11 16-2z"/><circle cx="394" cy="550" r="8"/></g>')),
-        item("princess-dress", "Princess dress", "👑", "#67b8ec", dressShape("#67b8ec", '<path d="M248 737Q384 789 520 737" fill="none" stroke="#f5f0ff" stroke-width="22"/><path d="M321 319Q384 366 447 319" fill="none" stroke="#f5f0ff" stroke-width="10"/>', "M305 448Q384 473 463 448Q526 547 552 790Q384 858 216 790Q242 547 305 448Z")),
+        item("princess-dress", "Princess dress", "👑", "#67b8ec", dressShape("#67b8ec", '<path d="M270 737Q384 778 498 737" fill="none" stroke="#f5f0ff" stroke-width="22"/><path d="M321 319Q384 366 447 319" fill="none" stroke="#f5f0ff" stroke-width="10"/>', "M304 448Q384 471 464 448C485 500 504 548 510 610L524 790Q384 841 244 790L258 610C264 548 283 500 304 448Z")),
         item("rainbow-dress", "Rainbow dress", "🌈", "#f47f8b", dressShape("#f47f8b", '<path d="M247 665Q384 713 521 665" fill="none" stroke="#ffd65a" stroke-width="30"/><path d="M240 704Q384 755 528 704" fill="none" stroke="#66cddd" stroke-width="24"/>')),
         item("flower-dress", "Flower dress", "🌺", "#ef7767", dressShape("#ef7767", '<g fill="#fff0ae" stroke="none"><circle cx="319" cy="575" r="14"/><circle cx="397" cy="633" r="14"/><circle cx="459" cy="548" r="14"/><circle cx="350" cy="727" r="14"/><circle cx="475" cy="742" r="14"/></g>')),
-        item("cozy-pajamas", "Cozy pajamas", "🌙", "#7c91df", dressShape("#7c91df", '<g fill="#fff0a8" stroke="none"><circle cx="330" cy="548" r="9"/><circle cx="441" cy="612" r="8"/><path d="M380 680l8 17 19 2-14 13 4 19-17-9-16 9 3-19-13-13 19-2z"/></g>', "M303 449Q384 470 465 449L499 738Q451 756 408 741L384 575L360 741Q317 756 269 738Z")),
+        item("cozy-pajamas", "Cozy pajamas", "🌙", "#7c91df", dressShape("#7c91df", '<g fill="#fff0a8" stroke="none"><circle cx="330" cy="548" r="9"/><circle cx="441" cy="612" r="8"/><path d="M380 680l8 17 19 2-14 13 4 19-17-9-16 9 3-19-13-13 19-2z"/></g>', "M302 449Q384 468 466 449C480 500 491 541 496 580L502 735Q451 752 406 738L384 591L362 738Q317 752 266 735L272 580C277 541 288 500 302 449Z")),
       ],
     },
     {
