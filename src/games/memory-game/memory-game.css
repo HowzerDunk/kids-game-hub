@@ -344,20 +344,21 @@
 }
 
 @media (orientation: landscape) {
-  .memory-game-page .game-page-header { padding-top: 4px; padding-bottom: 4px; }
-  .memory-game .shell { padding: 3px 7px max(5px, env(safe-area-inset-bottom)); }
-  .memory-game header { height: 34px; }
-  .memory-game .brand { font-size: 15px; }
-  .memory-game .brand > b { width: 28px; height: 28px; font-size: 18px; }
-  .memory-game header button { min-height: 29px; padding: 4px 9px; }
-  .memory-game .intro { padding: 0 3px 4px; }
+  .memory-game-page .game-page-header { padding: 3px 9px; font-size: 10px; }
+  .memory-game-page .home-link { padding: 7px 11px; }
+  .memory-game .shell { position: relative; grid-template-rows: auto minmax(0, 1fr); padding: 3px 7px max(5px, env(safe-area-inset-bottom)); }
+  .memory-game header { position: absolute; z-index: 5; top: 3px; right: 8px; height: 30px; padding: 0; }
+  .memory-game .brand { display: none; }
+  .memory-game header button { min-width: 36px; min-height: 29px; padding: 4px 8px; }
+  .memory-game .intro { padding: 0 47px 4px 0; }
   .memory-game .intro p,
   .memory-game .intro h1 { display: none; }
-  .memory-game .levels { max-width: 620px; margin-top: 0; padding: 2px; }
-  .memory-game .levels button { min-height: 30px; padding: 2px; }
+  .memory-game .levels { width: 100%; max-width: none; margin-top: 0; padding: 2px; }
+  .memory-game .levels button { min-height: 29px; padding: 1px 2px; }
   .memory-game .levels button small { display: inline; margin-left: 4px; }
-  .memory-game .game { padding: 6px; border-radius: 15px; }
-  .memory-game .status { margin-bottom: 4px; }
+  .memory-game .game { padding: 5px 6px 6px; border-radius: 15px; }
+  .memory-game .status { min-height: 28px; margin-bottom: 3px; }
+  .memory-game .status button { min-height: 27px; padding: 3px 9px; box-shadow: 0 2px #d6e0d9; }
   .memory-game .hint { display: none; }
   .memory-game .grid { gap: 5px; }
   .memory-game .size-3 { grid-template: repeat(2, minmax(0, 1fr)) / repeat(3, minmax(0, 1fr)); width: min(100%, 340px); }
