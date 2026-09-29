@@ -1,1 +1,374 @@
-.memory-game{color:#294052;background:#d9eee8;min-height:calc(100vh - 54px);font-family:'DM Sans',sans-serif;overscroll-behavior:none;touch-action:manipulation}.memory-game .shell{min-height:calc(100vh - 54px);background:linear-gradient(#fffaf0 0 34%,#d9eee8 34%);padding:8px 10px 18px}.memory-game header{height:62px;display:flex;justify-content:space-between;align-items:center;padding:0 7px}.memory-game .brand{display:flex;align-items:center;font:700 20px/1 'Fredoka'}.memory-game .brand>b{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#ed6b58;color:white;font-size:27px;margin-right:9px;box-shadow:0 3px #c95142}.memory-game .brand small{display:block;font:700 8px/1.5 'DM Sans';letter-spacing:1.4px;color:#759180;text-transform:uppercase}.memory-game header button,.memory-game .status button{border:0;border-radius:999px;background:white;padding:10px 13px;box-shadow:0 3px #d6e0d9;font-weight:800}.memory-game .intro{text-align:center;padding:16px 3px 21px}.memory-game .intro p{font-size:10px;color:#d85f50;letter-spacing:1.5px;font-weight:800;margin:0 0 7px}.memory-game h1,.memory-game h2{font:700 clamp(36px,11vw,54px)/.95 'Fredoka';letter-spacing:-2px;margin:0}.memory-game em{color:#ed6b58;font-style:normal}.memory-game .levels{display:flex;margin:18px auto 0;max-width:540px;background:#efe6d4;border-radius:15px;padding:4px}.memory-game .levels button{flex:1;border:0;background:transparent;border-radius:11px;padding:7px 2px;color:#708079;font-size:10px;font-weight:800}.memory-game .levels button b{font-size:15px;margin-right:3px}.memory-game .levels button small{display:block;font-size:7px}.memory-game .levels .on{background:white;color:#314b44;box-shadow:0 2px 5px #cfc5b3}.memory-game .game{background:#f7f3e9;border-radius:23px;padding:15px 10px;max-width:850px;margin:auto;box-shadow:0 9px rgba(57,116,105,.12),0 15px 36px rgba(55,99,90,.16)}.memory-game .status{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;margin:0 4px 14px;font-size:10px;color:#58756b}.memory-game .track{height:7px;background:#e3dfd2;border-radius:10px;overflow:hidden}.memory-game .track i{display:block;height:100%;background:linear-gradient(90deg,#ef8b70,#f5bd59);transition:width .3s}.memory-game .grid{display:grid;justify-content:center;gap:8px;margin:auto}.memory-game .size-3{grid-template-columns:repeat(2,minmax(90px,140px));max-width:290px}.memory-game .size-6,.memory-game .size-8{grid-template-columns:repeat(4,minmax(60px,120px))}.memory-game .size-17{grid-template-columns:repeat(4,minmax(55px,100px));gap:6px}.memory-game .card{border:0;padding:0;background:transparent;aspect-ratio:.78;perspective:800px}.memory-game .inner{display:block;width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .4s cubic-bezier(.2,.75,.2,1.15)}.memory-game .up .inner{transform:rotateY(180deg)}.memory-game .back,.memory-game .front{position:absolute;inset:0;border-radius:12px;overflow:hidden;backface-visibility:hidden;border:4px solid white;box-shadow:0 4px #ca5346}.memory-game .back{display:grid;place-items:center;background:linear-gradient(145deg,#f18c75,#e96757);color:#fff8dd;font:700 38px 'Fredoka'}.memory-game .back i{position:absolute;right:10px;top:8px;font-size:9px}.memory-game .front{transform:rotateY(180deg);background:#fff}.memory-game .front img{width:100%;height:100%;object-fit:cover}.memory-game .front strong{position:absolute;z-index:2;bottom:5px;left:50%;transform:translateX(-50%);max-width:94%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:#fffdf2;border-radius:20px;padding:4px 7px;font:700 clamp(6px,2vw,10px) 'Fredoka'}.memory-game .check{position:absolute;z-index:3;right:5px;top:5px;background:#51b88a;border:2px solid white;color:white;width:22px;height:22px;border-radius:50%;font-style:normal;font-weight:900;display:grid;place-items:center}.memory-game .done{animation:memory-pop .5s}.memory-game .hint{text-align:center;color:#87a097;font-size:10px;margin:13px 0 0}.memory-game .win{position:fixed;z-index:10;inset:0;background:#29405299;display:grid;place-items:center;padding:20px;backdrop-filter:blur(5px)}.memory-game .win[hidden]{display:none}.memory-game .win-card{text-align:center;background:#fffaf0;border:7px solid white;border-radius:28px;padding:25px;width:min(400px,95vw);box-shadow:0 12px #29405244;animation:memory-pop .4s}.memory-game .win-card>div{font-size:65px}.memory-game .win-card p{font-size:10px;letter-spacing:1.5px;color:#d85f50;font-weight:800}.memory-game .win-card h2{font-size:38px}.memory-game .win-card span{display:block;color:#718174;font-size:12px;margin:13px}.memory-game .win-card button{border:0;border-radius:999px;background:#ed6b58;color:white;padding:13px 24px;font-weight:900;box-shadow:0 4px #c74f41}@keyframes memory-pop{50%{transform:scale(1.05)}}@media(min-width:700px){.memory-game .size-17{grid-template-columns:repeat(6,minmax(75px,110px))}}@media(prefers-reduced-motion:reduce){.memory-game .inner{transition:none}.memory-game .done,.memory-game .win-card{animation:none}}
+.memory-game-page {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  height: 100svh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.memory-game-page .game-page-header {
+  width: 100%;
+  padding: 7px 12px;
+}
+
+.memory-game-page > #game-root {
+  min-height: 0;
+}
+
+.memory-game {
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  color: #294052;
+  background: #d9eee8;
+  font-family: "DM Sans", sans-serif;
+  overscroll-behavior: none;
+  touch-action: manipulation;
+}
+
+.memory-game .shell {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  height: 100%;
+  min-height: 0;
+  padding: 5px 8px max(8px, env(safe-area-inset-bottom));
+  overflow: hidden;
+  background: linear-gradient(#fffaf0 0 29%, #d9eee8 29%);
+}
+
+.memory-game header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  padding: 0 5px;
+}
+
+.memory-game .brand {
+  display: flex;
+  align-items: center;
+  font: 700 18px/1 "Fredoka";
+}
+
+.memory-game .brand > b {
+  display: grid;
+  width: 35px;
+  height: 35px;
+  margin-right: 8px;
+  place-items: center;
+  border-radius: 50%;
+  color: white;
+  background: #ed6b58;
+  box-shadow: 0 3px #c95142;
+  font-size: 23px;
+}
+
+.memory-game .brand small {
+  display: block;
+  color: #759180;
+  font: 700 7px/1.5 "DM Sans";
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+}
+
+.memory-game header button,
+.memory-game .status button {
+  min-width: 42px;
+  min-height: 38px;
+  padding: 8px 11px;
+  border: 0;
+  border-radius: 999px;
+  background: white;
+  box-shadow: 0 3px #d6e0d9;
+  font-weight: 800;
+}
+
+.memory-game .intro {
+  padding: 4px 3px 8px;
+  text-align: center;
+}
+
+.memory-game .intro p {
+  margin: 0 0 3px;
+  color: #d85f50;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+}
+
+.memory-game h1,
+.memory-game h2 {
+  margin: 0;
+  font: 700 clamp(27px, 8vw, 40px)/0.95 "Fredoka";
+  letter-spacing: -1.5px;
+}
+
+.memory-game em {
+  color: #ed6b58;
+  font-style: normal;
+}
+
+.memory-game .levels {
+  display: flex;
+  max-width: 540px;
+  margin: 7px auto 0;
+  padding: 3px;
+  border-radius: 13px;
+  background: #efe6d4;
+}
+
+.memory-game .levels button {
+  flex: 1;
+  min-height: 34px;
+  padding: 4px 2px;
+  border: 0;
+  border-radius: 10px;
+  color: #708079;
+  background: transparent;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.memory-game .levels button b {
+  margin-right: 2px;
+  font-size: 13px;
+}
+
+.memory-game .levels button small {
+  display: block;
+  font-size: 7px;
+}
+
+.memory-game .levels .on {
+  color: #314b44;
+  background: white;
+  box-shadow: 0 2px 5px #cfc5b3;
+}
+
+.memory-game .game {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  width: min(100%, 1000px);
+  height: 100%;
+  min-height: 0;
+  margin: auto;
+  padding: 8px;
+  border-radius: 18px;
+  background: #f7f3e9;
+  box-shadow: 0 7px rgba(57, 116, 105, 0.12), 0 11px 25px rgba(55, 99, 90, 0.14);
+}
+
+.memory-game .status {
+  display: grid;
+  grid-template-columns: auto minmax(45px, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  margin: 0 2px 7px;
+  color: #58756b;
+  font-size: 9px;
+}
+
+.memory-game .track {
+  height: 6px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #e3dfd2;
+}
+
+.memory-game .track i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #ef8b70, #f5bd59);
+  transition: width 0.3s;
+}
+
+.memory-game .grid {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  gap: 6px;
+}
+
+.memory-game .size-3 { grid-template: repeat(3, minmax(0, 1fr)) / repeat(2, minmax(0, 1fr)); width: min(100%, 320px); justify-self: center; }
+.memory-game .size-6 { grid-template: repeat(4, minmax(0, 1fr)) / repeat(3, minmax(0, 1fr)); }
+.memory-game .size-8 { grid-template: repeat(4, minmax(0, 1fr)) / repeat(4, minmax(0, 1fr)); }
+.memory-game .size-17 { grid-template: repeat(7, minmax(0, 1fr)) / repeat(5, minmax(0, 1fr)); gap: 4px; }
+
+.memory-game .card {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  perspective: 800px;
+}
+
+.memory-game .inner {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.2, 0.75, 0.2, 1.15);
+}
+
+.memory-game .up .inner { transform: rotateY(180deg); }
+
+.memory-game .back,
+.memory-game .front {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border: 3px solid white;
+  border-radius: 10px;
+  backface-visibility: hidden;
+  box-shadow: 0 3px #ca5346;
+}
+
+.memory-game .back {
+  display: grid;
+  place-items: center;
+  color: #fff8dd;
+  background: linear-gradient(145deg, #f18c75, #e96757);
+  font: 700 clamp(18px, 5vmin, 34px) "Fredoka";
+}
+
+.memory-game .back i {
+  position: absolute;
+  top: 5px;
+  right: 6px;
+  font-size: 7px;
+}
+
+.memory-game .front {
+  transform: rotateY(180deg);
+  background: #fff;
+}
+
+.memory-game .front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.memory-game .front strong {
+  position: absolute;
+  z-index: 2;
+  bottom: 3px;
+  left: 50%;
+  max-width: 94%;
+  padding: 3px 5px;
+  overflow: hidden;
+  transform: translateX(-50%);
+  border-radius: 20px;
+  color: #3f544f;
+  background: #fffdf2;
+  font: 700 clamp(5px, 1.5vmin, 9px) "Fredoka";
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.memory-game .check {
+  position: absolute;
+  z-index: 3;
+  top: 3px;
+  right: 3px;
+  display: grid;
+  width: clamp(15px, 3vmin, 21px);
+  height: clamp(15px, 3vmin, 21px);
+  place-items: center;
+  border: 2px solid white;
+  border-radius: 50%;
+  color: white;
+  background: #51b88a;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.memory-game .done { animation: memory-pop 0.5s; }
+
+.memory-game .hint {
+  margin: 5px 0 0;
+  color: #87a097;
+  text-align: center;
+  font-size: 8px;
+}
+
+.memory-game .win {
+  position: fixed;
+  z-index: 10;
+  inset: 0;
+  display: grid;
+  padding: 20px;
+  place-items: center;
+  background: #29405299;
+  backdrop-filter: blur(5px);
+}
+
+.memory-game .win[hidden] { display: none; }
+
+.memory-game .win-card {
+  width: min(400px, 95vw);
+  padding: 25px;
+  border: 7px solid white;
+  border-radius: 28px;
+  text-align: center;
+  background: #fffaf0;
+  box-shadow: 0 12px #29405244;
+  animation: memory-pop 0.4s;
+}
+
+.memory-game .win-card > div { font-size: 65px; }
+.memory-game .win-card p { color: #d85f50; font-size: 10px; font-weight: 800; letter-spacing: 1.5px; }
+.memory-game .win-card h2 { font-size: 38px; }
+.memory-game .win-card span { display: block; margin: 13px; color: #718174; font-size: 12px; }
+.memory-game .win-card button { padding: 13px 24px; border: 0; border-radius: 999px; color: white; background: #ed6b58; box-shadow: 0 4px #c74f41; font-weight: 900; }
+
+.memory-game[data-pairs="17"] header { height: 40px; }
+.memory-game[data-pairs="17"] .brand > b { width: 31px; height: 31px; font-size: 20px; }
+.memory-game[data-pairs="17"] .intro p,
+.memory-game[data-pairs="17"] .intro h1,
+.memory-game[data-pairs="17"] .hint { display: none; }
+.memory-game[data-pairs="17"] .intro { padding: 1px 3px 5px; }
+.memory-game[data-pairs="17"] .levels { margin-top: 0; }
+.memory-game[data-pairs="17"] .game { padding: 6px; }
+.memory-game[data-pairs="17"] .status { margin-bottom: 4px; }
+.memory-game[data-pairs="17"] .front strong { display: none; }
+
+@keyframes memory-pop {
+  50% { transform: scale(1.05); }
+}
+
+@media (orientation: landscape) {
+  .memory-game-page .game-page-header { padding-top: 4px; padding-bottom: 4px; }
+  .memory-game .shell { padding: 3px 7px max(5px, env(safe-area-inset-bottom)); }
+  .memory-game header { height: 34px; }
+  .memory-game .brand { font-size: 15px; }
+  .memory-game .brand > b { width: 28px; height: 28px; font-size: 18px; }
+  .memory-game header button { min-height: 29px; padding: 4px 9px; }
+  .memory-game .intro { padding: 0 3px 4px; }
+  .memory-game .intro p,
+  .memory-game .intro h1 { display: none; }
+  .memory-game .levels { max-width: 620px; margin-top: 0; padding: 2px; }
+  .memory-game .levels button { min-height: 30px; padding: 2px; }
+  .memory-game .levels button small { display: inline; margin-left: 4px; }
+  .memory-game .game { padding: 6px; border-radius: 15px; }
+  .memory-game .status { margin-bottom: 4px; }
+  .memory-game .hint { display: none; }
+  .memory-game .grid { gap: 5px; }
+  .memory-game .size-3 { grid-template: repeat(2, minmax(0, 1fr)) / repeat(3, minmax(0, 1fr)); width: min(100%, 340px); }
+  .memory-game .size-6 { grid-template: repeat(2, minmax(0, 1fr)) / repeat(6, minmax(0, 1fr)); }
+  .memory-game .size-8 { grid-template: repeat(2, minmax(0, 1fr)) / repeat(8, minmax(0, 1fr)); }
+  .memory-game .size-17 { grid-template: repeat(3, minmax(0, 1fr)) / repeat(12, minmax(0, 1fr)); gap: 3px; }
+  .memory-game .front strong { font-size: clamp(5px, 1.2vw, 8px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .memory-game .inner { transition: none; }
+  .memory-game .done,
+  .memory-game .win-card { animation: none; }
+}
