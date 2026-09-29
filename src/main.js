@@ -1,4 +1,5 @@
 import "./styles/global.css";
+import { siteConfig } from "./app/site-config.js";
 import { games } from "./games/registry.js";
 
 const app = document.querySelector("#app");
@@ -9,7 +10,7 @@ function navigate(path) {
 }
 
 function renderHome() {
-  document.title = "Esme's Playground";
+  document.title = siteConfig.name;
   app.innerHTML = `
     <main class="hub-shell">
       <header class="hub-header"><a href="#/" class="hub-brand" aria-label="Esme's Playground home">🌼 <span>Esme's <small>Playground</small></span></a></header>
@@ -26,7 +27,7 @@ function renderGame(slug) {
     navigate("/");
     return;
   }
-  document.title = `${game.title} · Esme's Playground`;
+  document.title = `${game.title} · ${siteConfig.name}`;
   app.innerHTML = `<main class="game-page"><header class="game-page-header"><a href="#/" class="home-link">← All games</a><span>Esme's Playground</span></header><div id="game-root"></div></main>`;
   cleanup = game.mount(document.querySelector("#game-root"));
 }

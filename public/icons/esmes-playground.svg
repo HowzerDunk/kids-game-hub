@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Esme's Playground</title>
+  <desc id="desc">A cheerful yellow flower on a coral circle.</desc>
+  <rect width="512" height="512" rx="112" fill="#fffaf0"/>
+  <circle cx="256" cy="256" r="172" fill="#ed6b58"/>
+  <g fill="#f6d889">
+    <ellipse cx="256" cy="154" rx="46" ry="86"/>
+    <ellipse cx="358" cy="256" rx="86" ry="46"/>
+    <ellipse cx="256" cy="358" rx="46" ry="86"/>
+    <ellipse cx="154" cy="256" rx="86" ry="46"/>
+    <ellipse cx="328" cy="184" rx="46" ry="86" transform="rotate(45 328 184)"/>
+    <ellipse cx="328" cy="328" rx="46" ry="86" transform="rotate(135 328 328)"/>
+    <ellipse cx="184" cy="328" rx="46" ry="86" transform="rotate(225 184 328)"/>
+    <ellipse cx="184" cy="184" rx="46" ry="86" transform="rotate(315 184 184)"/>
+  </g>
+  <circle cx="256" cy="256" r="62" fill="#fffaf0"/>
+  <circle cx="256" cy="256" r="29" fill="#ed6b58"/>
+</svg>

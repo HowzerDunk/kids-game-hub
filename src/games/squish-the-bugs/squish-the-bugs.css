@@ -1,5 +1,5 @@
 .squish-the-bugs {
-  min-height: calc(100vh - 54px);
+  min-height: calc(var(--app-viewport-height) - var(--game-header-height));
   color: #294052;
   font-family: "DM Sans", sans-serif;
   touch-action: manipulation;
@@ -9,7 +9,7 @@
 .bugs-shell {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
-  min-height: calc(100vh - 54px);
+  min-height: calc(var(--app-viewport-height) - var(--game-header-height));
   padding: 8px 12px max(16px, env(safe-area-inset-bottom));
   background: linear-gradient(#fff8e9 0 26%, #a9ddf1 26% 55%, #84c96d 55%);
 }
@@ -482,7 +482,7 @@
 
 @media (orientation: landscape) {
   .squish-the-bugs {
-    height: calc(100svh - 54px);
+    height: calc(var(--app-viewport-height) - var(--game-header-height));
     min-height: 340px;
     overflow: hidden;
   }
@@ -532,7 +532,7 @@
   .rotate-prompt {
     position: fixed;
     z-index: 30;
-    inset: 54px 0 0;
+    inset: var(--game-header-height) 0 0;
     display: grid;
     padding: 24px;
     place-content: center;
