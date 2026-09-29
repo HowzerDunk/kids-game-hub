@@ -167,6 +167,19 @@
   stroke-linecap: round;
 }
 
+.scene-anthill .hill-ridge {
+  fill: none;
+  stroke: #92562f;
+  stroke-width: 8;
+  stroke-linecap: round;
+  opacity: 0.7;
+}
+
+.scene-anthill .hill-pebbles circle {
+  fill: #74452f;
+  opacity: 0.65;
+}
+
 .scene-anthill .hill-door {
   fill: #493027;
   stroke: #673e2c;
@@ -176,10 +189,10 @@
 .anthill-mouth {
   position: absolute;
   z-index: 5;
-  right: 0;
+  right: 4.7%;
   bottom: -1px;
-  width: 9.5%;
-  height: 13%;
+  width: 10.2%;
+  height: 16.5%;
   border: clamp(3px, 0.55vw, 7px) solid #75452c;
   border-bottom: 0;
   border-radius: 52% 52% 0 0;

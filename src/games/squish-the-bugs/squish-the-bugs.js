@@ -31,9 +31,9 @@ export function mountSquishTheBugs(root) {
             <g class="scene-cloud small" transform="translate(630 145)"><ellipse cx="55" cy="34" rx="55" ry="24"/><circle cx="42" cy="18" r="31"/><circle cx="76" cy="13" r="38"/></g>
             <g class="scene-flowers" transform="translate(530 480)"><path d="M10 36V7M50 36V1M89 36V10" /><g transform="translate(10 7)"><circle r="12"/><circle class="flower-center" r="5"/></g><g transform="translate(50 1)"><circle r="14"/><circle class="flower-center" r="5"/></g><g transform="translate(89 10)"><circle r="11"/><circle class="flower-center" r="4"/></g></g>
             <g class="scene-basket" transform="translate(420 440)"><path d="M15 24Q20 -8 50 -8T85 24" fill="none"/><path d="M4 22H96L87 74Q85 83 74 84H25Q14 83 12 74Z"/><path class="basket-weave" d="M13 41H89M16 61H86M31 24V80M51 24V82M71 24V80"/></g>
-            <g class="scene-trails"><path d="M1115 455C940 410 730 330 330 340"/><path d="M1115 455C920 448 710 395 330 400"/><path d="M1115 455C920 485 700 455 330 460"/><path d="M1115 455C930 525 705 515 330 520"/></g>
+            <g class="scene-trails"><path d="M1080 535C940 430 730 330 330 340"/><path d="M1080 535C920 480 710 395 330 400"/><path d="M1080 535C920 515 700 455 330 460"/><path d="M1080 535C930 545 705 515 330 520"/></g>
             <g class="scene-bush" transform="translate(1060 285)"><circle cx="68" cy="80" r="69"/><circle cx="8" cy="96" r="55"/><circle cx="119" cy="109" r="48"/><circle class="bush-highlight" cx="45" cy="51" r="27"/></g>
-            <g class="scene-anthill" transform="translate(1030 430)"><path d="M0 125Q14 28 102 11Q191 28 205 125Z"/><path class="hill-highlight" d="M29 88Q60 38 112 31"/><path class="hill-door" d="M67 126Q70 72 107 70Q145 73 147 126Z"/></g>
+            <g class="scene-anthill" transform="translate(940 360)"><path d="M0 240Q25 62 137 14Q252 58 280 240Z"/><path class="hill-highlight" d="M35 180Q67 76 148 45"/><path class="hill-ridge" d="M45 198Q139 156 236 199M63 132Q138 97 215 137M94 77Q139 58 183 80"/><g class="hill-pebbles"><circle cx="46" cy="211" r="8"/><circle cx="217" cy="171" r="7"/><circle cx="72" cy="153" r="5"/><circle cx="196" cy="103" r="6"/></g><path class="hill-door" d="M88 240Q91 141 139 137Q190 142 192 240Z"/></g>
           </svg>
           <div class="anthill-mouth" aria-hidden="true"></div>
           <div class="wave-display"><span aria-hidden="true">🌼</span><strong data-wave>1</strong></div>
@@ -152,7 +152,7 @@ export function mountSquishTheBugs(root) {
     const laneIndex = (spawned + wave - 1) % ANT_LANES.length;
     const bug = {
       element,
-      x: 94,
+      x: 87.2,
       y: 82,
       laneY: ANT_LANES[laneIndex],
       entryTime: 0,
@@ -222,7 +222,7 @@ export function mountSquishTheBugs(root) {
           bug.entryTime += elapsed;
           const progress = Math.min(1, bug.entryTime / 1000);
           const eased = progress * progress * (3 - 2 * progress);
-          bug.x = 94 - eased * 9;
+          bug.x = 87.2 - eased * 8;
           bug.y = 82 + (bug.laneY - 82) * eased;
           if (progress === 1) bug.entering = false;
         } else {
