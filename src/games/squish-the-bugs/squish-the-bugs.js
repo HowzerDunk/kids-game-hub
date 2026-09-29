@@ -35,6 +35,7 @@ export function mountSquishTheBugs(root) {
             <g class="scene-bush" transform="translate(1060 285)"><circle cx="68" cy="80" r="69"/><circle cx="8" cy="96" r="55"/><circle cx="119" cy="109" r="48"/><circle class="bush-highlight" cx="45" cy="51" r="27"/></g>
             <g class="scene-anthill" transform="translate(1030 430)"><path d="M0 125Q14 28 102 11Q191 28 205 125Z"/><path class="hill-highlight" d="M29 88Q60 38 112 31"/><path class="hill-door" d="M67 126Q70 72 107 70Q145 73 147 126Z"/></g>
           </svg>
+          <div class="anthill-mouth" aria-hidden="true"></div>
           <div class="wave-display"><span aria-hidden="true">🌼</span><strong data-wave>1</strong></div>
           <div class="picnic-blanket" aria-hidden="true"></div>
           <div class="sandwich" data-sandwich aria-label="The picnic sandwich, five bites left">
@@ -151,8 +152,11 @@ export function mountSquishTheBugs(root) {
     const laneIndex = (spawned + wave - 1) % ANT_LANES.length;
     const bug = {
       element,
-      x: 103,
-      y: ANT_LANES[laneIndex],
+      x: 94,
+      y: 82,
+      laneY: ANT_LANES[laneIndex],
+      entryTime: 0,
+      entering: true,
       phase: Math.random() * Math.PI * 2,
       speed: waveSettings(wave).speed * (0.9 + Math.random() * 0.2),
     };
@@ -214,7 +218,16 @@ export function mountSquishTheBugs(root) {
     lastTime = time;
     if (running && !portraitPhone.matches) {
       bugs.slice().forEach((bug) => {
-        bug.x -= bug.speed * elapsed / 1000;
+        if (bug.entering) {
+          bug.entryTime += elapsed;
+          const progress = Math.min(1, bug.entryTime / 1000);
+          const eased = progress * progress * (3 - 2 * progress);
+          bug.x = 94 - eased * 9;
+          bug.y = 82 + (bug.laneY - 82) * eased;
+          if (progress === 1) bug.entering = false;
+        } else {
+          bug.x -= bug.speed * elapsed / 1000;
+        }
         bug.element.style.left = `${bug.x}%`;
         bug.element.style.top = `${bug.y + Math.sin(time / 125 + bug.phase) * 1.4}%`;
         if (bug.x <= 16) {
