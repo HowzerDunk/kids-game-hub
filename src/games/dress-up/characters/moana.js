@@ -1,30 +1,33 @@
 const item = (id, name, preview, color, svg) => ({ id, name, preview, color, svg });
 
+const bottomUnderlayer = `
+  <defs><linearGradient id="moana-leg-tone" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#ca7b59"/><stop offset="1" stop-color="#c47552"/></linearGradient></defs>
+  <path fill="url(#moana-leg-tone)" d="M267 476Q384 490 501 476L512 712Q462 733 410 717L384 575L358 717Q306 733 256 712Z"/>`;
+
 const topShape = (fill, detail = "") => `
   <g class="outfit-piece" stroke="#6b4550" stroke-width="4" stroke-linejoin="round">
-    <path fill="${fill}" d="M291 276Q319 260 341 264Q384 289 427 264Q450 261 477 276L489 345L469 468Q384 486 299 468L279 345Z"/>
-    <path fill="${fill}" d="M292 279Q261 281 244 320L281 350L303 304ZM476 279Q507 281 524 320L487 350L465 304Z"/>
+    <path fill="${fill}" d="M339 251Q384 280 429 251Q465 250 493 276Q521 284 535 318L493 355L474 465Q384 481 294 465L275 355L233 318Q247 284 275 276Q303 250 339 251Z"/>
     ${detail}
   </g>`;
 
 const shortsShape = (fill, detail = "") => `
+  ${bottomUnderlayer}
   <g class="outfit-piece" stroke="#5c4a61" stroke-width="4" stroke-linejoin="round">
-    <path fill="${fill}" d="M269 478Q384 493 499 478L509 710Q459 729 410 709L384 557L358 709Q309 729 259 710Z"/>
-    <path d="M384 504V557" fill="none" opacity=".55"/>
+    <path fill="${fill}" d="M286 477Q384 489 482 477L499 515L501 704Q455 719 409 704L384 566L359 704Q313 719 267 704L269 515Z"/>
+    <path d="M384 502V566" fill="none" opacity=".55"/>
     ${detail}
   </g>`;
 
 const skirtShape = (fill, detail = "") => `
   <g class="outfit-piece" stroke="#6b4550" stroke-width="4" stroke-linejoin="round">
-    <path fill="${fill}" d="M270 478Q384 493 498 478L536 703Q384 754 232 703Z"/>
-    <path d="M278 501Q384 520 490 501" fill="none" stroke="#fff" stroke-width="8" opacity=".45"/>
+    <path fill="${fill}" d="M279 477Q384 489 489 477L516 699Q384 741 252 699Z"/>
+    <path d="M286 498Q384 514 482 498" fill="none" stroke="#fff" stroke-width="8" opacity=".45"/>
     ${detail}
   </g>`;
 
 const dressShape = (fill, detail = "", skirt = "M301 450Q384 471 467 450L548 786Q384 847 220 786Z") => `
   <g class="outfit-piece" stroke="#68445b" stroke-width="4" stroke-linejoin="round">
-    <path fill="${fill}" d="M292 276Q320 260 342 264Q384 290 426 264Q450 261 476 276L489 348L463 488H305L279 348Z"/>
-    <path fill="${fill}" d="M292 279Q260 282 245 321L281 350L304 303ZM476 279Q508 282 523 321L487 350L464 303Z"/>
+    <path fill="${fill}" d="M339 251Q384 280 429 251Q465 250 493 276Q521 284 535 318L493 355L472 452L463 488H305L296 452L275 355L233 318Q247 284 275 276Q303 250 339 251Z"/>
     <path fill="${fill}" d="${skirt}"/>
     <path d="M303 467Q384 489 465 467" fill="none" stroke="#fff" stroke-width="10" opacity=".42"/>
     ${detail}
@@ -69,7 +72,7 @@ export const moanaCharacter = {
         item("princess-dress", "Princess dress", "👑", "#67b8ec", dressShape("#67b8ec", '<path d="M248 737Q384 789 520 737" fill="none" stroke="#f5f0ff" stroke-width="22"/><path d="M321 319Q384 366 447 319" fill="none" stroke="#f5f0ff" stroke-width="10"/>', "M305 448Q384 473 463 448Q526 547 552 790Q384 858 216 790Q242 547 305 448Z")),
         item("rainbow-dress", "Rainbow dress", "🌈", "#f47f8b", dressShape("#f47f8b", '<path d="M247 665Q384 713 521 665" fill="none" stroke="#ffd65a" stroke-width="30"/><path d="M240 704Q384 755 528 704" fill="none" stroke="#66cddd" stroke-width="24"/>')),
         item("flower-dress", "Flower dress", "🌺", "#ef7767", dressShape("#ef7767", '<g fill="#fff0ae" stroke="none"><circle cx="319" cy="575" r="14"/><circle cx="397" cy="633" r="14"/><circle cx="459" cy="548" r="14"/><circle cx="350" cy="727" r="14"/><circle cx="475" cy="742" r="14"/></g>')),
-        item("cozy-pajamas", "Cozy pajamas", "🌙", "#7c91df", dressShape("#7c91df", '<g fill="#fff0a8" stroke="none"><circle cx="330" cy="548" r="9"/><circle cx="441" cy="612" r="8"/><path d="M380 680l8 17 19 2-14 13 4 19-17-9-16 9 3-19-13-13 19-2z"/></g>', "M303 449Q384 472 465 449L499 752Q445 772 408 748L384 571L360 748Q323 772 269 752Z")),
+        item("cozy-pajamas", "Cozy pajamas", "🌙", "#7c91df", dressShape("#7c91df", '<g fill="#fff0a8" stroke="none"><circle cx="330" cy="548" r="9"/><circle cx="441" cy="612" r="8"/><path d="M380 680l8 17 19 2-14 13 4 19-17-9-16 9 3-19-13-13 19-2z"/></g>', "M303 449Q384 470 465 449L499 738Q451 756 408 741L384 575L360 741Q317 756 269 738Z")),
       ],
     },
     {
