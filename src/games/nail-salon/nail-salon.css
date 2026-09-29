@@ -174,3 +174,10 @@
   .salon-nail.just-painted .nail-art-mark,
   .salon-nail.just-painted .nail-character { animation: none; }
 }
+
+/* The same movie artwork as Memory Garden, clipped inside each nail. */
+.salon-options:has(img) { justify-content: flex-start; }
+.salon-options button img { width: 34px; height: 34px; object-fit: cover; border-radius: 50%; pointer-events: none; }
+@media (orientation: landscape) {
+  .salon-options:has(img) { justify-content: center; }
+}

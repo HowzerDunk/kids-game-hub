@@ -27,20 +27,21 @@ const palettes = {
   ],
   characters: [
     { id: "none", label: "No character", icon: "✕" },
-    { id: "flower", label: "Flower", icon: "🌼" },
-    { id: "kitty", label: "Kitty", icon: "🐱" },
-    { id: "frog", label: "Frog", icon: "🐸" },
-    { id: "unicorn", label: "Unicorn", icon: "🦄" },
-    { id: "butterfly", label: "Butterfly", icon: "🦋" },
+    ...[
+      ["moana", "Moana"], ["thelma", "Thelma"], ["shrek", "Shrek"],
+      ["zootopia", "Zootopia"], ["sing", "Sing"], ["home", "Home"],
+      ["pets", "Secret Life of Pets"], ["leo", "Leo"],
+      ["outback", "Back to the Outback"], ["coco", "Coco"],
+    ].map(([id, label]) => ({ id, label, image: `${import.meta.env.BASE_URL}games/memory-game/characters/${id}.webp` })),
   ],
 };
 
 const blankNail = () => ({ color: "transparent", design: "none", character: "none" });
 
-function designMarkup(nail, width, height) {
+function designMarkup(nail, width, height, clipId) {
   if (nail.character !== "none") {
     const character = palettes.characters.find(({ id }) => id === nail.character);
-    return `<text class="nail-character" x="0" y="${height * 0.13}" aria-hidden="true">${character.icon}</text>`;
+    return `<image class="nail-character" href="${character.image}" x="-${width / 2}" y="-${height / 2}" width="${width}" height="${height}" preserveAspectRatio="xMidYMid slice" clip-path="url(#${clipId})" aria-hidden="true"/>`;
   }
 
   if (nail.design === "dots") {
@@ -58,21 +59,23 @@ function designMarkup(nail, width, height) {
   return "";
 }
 
-function nailMarkup(definition, nail, selected) {
+function nailMarkup(definition, nail, selected, highlighted) {
   const { x, y, width, height, rotate = 0 } = definition;
   const nailPath = `M 0 -${height / 2}C ${width * 0.3} -${height / 2} ${width * 0.46} -${height * 0.34} ${width * 0.46} -${height * 0.12}L ${width * 0.42} ${height * 0.27}C ${width * 0.3} ${height * 0.45} 0 ${height * 0.5} -${width * 0.3} ${height * 0.45}C -${width * 0.42} ${height * 0.32} -${width * 0.46} ${height * 0.12} -${width * 0.46} -${height * 0.12}C -${width * 0.46} -${height * 0.34} -${width * 0.3} -${height / 2} 0 -${height / 2}Z`;
   return `
-    <g class="salon-nail${selected ? " is-selected" : ""}${nail.color === "transparent" ? " is-clear" : ""}" data-nail="${definition.id}" role="button" tabindex="0" aria-label="${definition.label}${selected ? ", selected" : ""}" aria-pressed="${selected}" transform="translate(${x} ${y}) rotate(${rotate})">
+    <g class="salon-nail${highlighted ? " is-selected" : ""}${nail.color === "transparent" ? " is-clear" : ""}" data-nail="${definition.id}" role="button" tabindex="0" aria-label="${definition.label}${selected ? ", selected" : ""}" aria-pressed="${selected}" transform="translate(${x} ${y}) rotate(${rotate})">
       <ellipse class="nail-hit" rx="${Math.max(34, width * 0.9)}" ry="${Math.max(42, height * 0.72)}"/>
       <path class="nail-selection" d="${nailPath}"/>
       <path class="nail-polish" d="${nailPath}" fill="${nail.color}"/>
       <path class="nail-shine" d="M-${width * 0.2} -${height * 0.24}Q-${width * 0.05} -${height * 0.36} ${width * 0.1} -${height * 0.29}"/>
-      ${designMarkup(nail, width, height)}
+      <defs><clipPath id="salon-clip-${definition.id}"><path d="${nailPath}"/></clipPath></defs>
+      ${designMarkup(nail, width, height, `salon-clip-${definition.id}`)}
     </g>`;
 }
 
 export function mountNailSalon(root) {
   let selectedNail = null;
+  let showHighlight = false;
   let activePalette = "colors";
   const nails = Object.fromEntries(nailDefinitions.map(({ id }) => [id, blankNail()]));
 
@@ -110,10 +113,11 @@ export function mountNailSalon(root) {
 
   function renderHand() {
     root.querySelector("[data-hand]").classList.toggle("is-waiting", !selectedNail);
-    handLayer.innerHTML = nailDefinitions.map((definition) => nailMarkup(definition, nails[definition.id], definition.id === selectedNail)).join("");
+    handLayer.innerHTML = nailDefinitions.map((definition) => nailMarkup(definition, nails[definition.id], definition.id === selectedNail, showHighlight && definition.id === selectedNail)).join("");
     handLayer.querySelectorAll("[data-nail]").forEach((button) => {
       const select = () => {
         selectedNail = button.dataset.nail;
+        showHighlight = true;
         const selectedDefinition = nailDefinitions.find(({ id }) => id === selectedNail);
         instruction.textContent = `${selectedDefinition.label} nail selected`;
         renderHand();
@@ -160,7 +164,7 @@ export function mountNailSalon(root) {
     container.classList.toggle("is-waiting", disabled);
     container.innerHTML = palettes[activePalette].map((option) => `
       <button type="button" data-option="${option.id}" class="${selectedOption(option) ? "is-selected" : ""}" ${disabled ? "disabled" : ""} aria-label="${option.label}" aria-pressed="${selectedOption(option)}" style="--swatch:${option.value || "#fff8ea"}">
-        ${activePalette === "colors" ? '<i aria-hidden="true"></i>' : `<span aria-hidden="true">${option.icon}</span>`}
+        ${activePalette === "colors" ? '<i aria-hidden="true"></i>' : option.image ? `<img src="${option.image}" alt="" draggable="false">` : `<span aria-hidden="true">${option.icon}</span>`}
       </button>`).join("");
     container.querySelectorAll("[data-option]").forEach((button) => button.addEventListener("click", () => {
       const option = palettes[activePalette].find(({ id }) => id === button.dataset.option);
@@ -175,6 +179,7 @@ export function mountNailSalon(root) {
         nail.character = option.id;
         if (option.id !== "none") nail.design = "none";
       }
+      showHighlight = false;
       renderHand();
       renderOptions();
       root.querySelector(`[data-nail="${selectedNail}"]`)?.classList.add("just-painted");
@@ -184,6 +189,7 @@ export function mountNailSalon(root) {
   root.querySelector("[data-reset]").addEventListener("click", () => {
     nailDefinitions.forEach(({ id }) => { nails[id] = blankNail(); });
     selectedNail = null;
+    showHighlight = false;
     instruction.textContent = "Choose a nail";
     renderHand();
     renderOptions();
