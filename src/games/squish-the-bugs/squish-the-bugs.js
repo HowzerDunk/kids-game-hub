@@ -25,11 +25,16 @@ export function mountSquishTheBugs(root) {
       </section>
       <section class="bugs-game" aria-label="Squish the bugs game">
         <div class="picnic" data-picnic>
-          <div class="cloud cloud-one" aria-hidden="true"></div><div class="cloud cloud-two" aria-hidden="true"></div>
-          <div class="flower-patch" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-          <div class="picnic-props" aria-hidden="true"><span class="basket"></span><span class="juice-box">☀</span></div>
-          <div class="ant-trails" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-          <div class="anthill" aria-hidden="true"><span></span></div><div class="bush" aria-hidden="true"><i></i><i></i><i></i></div>
+          <svg class="picnic-scenery" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <path class="distant-hill" d="M0 320Q150 250 305 315T610 300T920 318T1200 275V600H0Z"/>
+            <g class="scene-cloud" transform="translate(170 105)"><ellipse cx="55" cy="34" rx="55" ry="24"/><circle cx="42" cy="18" r="31"/><circle cx="76" cy="13" r="38"/></g>
+            <g class="scene-cloud small" transform="translate(630 145)"><ellipse cx="55" cy="34" rx="55" ry="24"/><circle cx="42" cy="18" r="31"/><circle cx="76" cy="13" r="38"/></g>
+            <g class="scene-flowers" transform="translate(530 480)"><path d="M10 36V7M50 36V1M89 36V10" /><g transform="translate(10 7)"><circle r="12"/><circle class="flower-center" r="5"/></g><g transform="translate(50 1)"><circle r="14"/><circle class="flower-center" r="5"/></g><g transform="translate(89 10)"><circle r="11"/><circle class="flower-center" r="4"/></g></g>
+            <g class="scene-basket" transform="translate(420 440)"><path d="M15 24Q20 -8 50 -8T85 24" fill="none"/><path d="M4 22H96L87 74Q85 83 74 84H25Q14 83 12 74Z"/><path class="basket-weave" d="M13 41H89M16 61H86M31 24V80M51 24V82M71 24V80"/></g>
+            <g class="scene-trails"><path d="M1115 455C940 410 730 330 330 340"/><path d="M1115 455C920 448 710 395 330 400"/><path d="M1115 455C920 485 700 455 330 460"/><path d="M1115 455C930 525 705 515 330 520"/></g>
+            <g class="scene-bush" transform="translate(1060 285)"><circle cx="68" cy="80" r="69"/><circle cx="8" cy="96" r="55"/><circle cx="119" cy="109" r="48"/><circle class="bush-highlight" cx="45" cy="51" r="27"/></g>
+            <g class="scene-anthill" transform="translate(1030 430)"><path d="M0 125Q14 28 102 11Q191 28 205 125Z"/><path class="hill-highlight" d="M29 88Q60 38 112 31"/><path class="hill-door" d="M67 126Q70 72 107 70Q145 73 147 126Z"/></g>
+          </svg>
           <div class="wave-display"><span aria-hidden="true">🌼</span><strong data-wave>1</strong></div>
           <div class="picnic-blanket" aria-hidden="true"></div>
           <div class="sandwich" data-sandwich aria-label="The picnic sandwich, five bites left">

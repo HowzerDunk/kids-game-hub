@@ -85,176 +85,93 @@
   background-size: 16px 16px;
 }
 
-.cloud {
-  position: absolute;
-  z-index: 1;
-  width: 90px;
-  height: 22px;
-  border-radius: 30px;
-  background: #fff;
-  opacity: 0.8;
-}
-
-.cloud::before,
-.cloud::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  border-radius: 50%;
-  background: inherit;
-}
-
-.cloud::before { width: 38px; height: 38px; left: 15px; }
-.cloud::after { width: 48px; height: 48px; right: 12px; }
-.cloud-one { top: 12%; left: 26%; transform: scale(0.7); }
-.cloud-two { top: 25%; left: 54%; transform: scale(0.5); }
-
-.flower-patch {
+.picnic-scenery {
   position: absolute;
   z-index: 2;
-  bottom: 5%;
-  left: 38%;
-  width: 105px;
-  height: 52px;
-}
-
-.flower-patch i {
-  position: absolute;
-  width: 22px;
-  height: 22px;
-  border: 5px dotted #fff7ce;
-  border-radius: 50%;
-  background: #ef7b7b;
-  box-shadow: 0 0 0 4px #ef7b7b;
-}
-
-.flower-patch i::after {
-  content: "";
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #f6cb4a;
-}
-
-.flower-patch i:nth-child(1) { bottom: 2px; left: 4px; transform: scale(0.65); }
-.flower-patch i:nth-child(2) { bottom: 12px; left: 30px; }
-.flower-patch i:nth-child(3) { bottom: 0; left: 61px; transform: scale(0.8); }
-.flower-patch i:nth-child(4) { bottom: 20px; left: 84px; transform: scale(0.55); }
-
-.picnic-props {
-  position: absolute;
-  z-index: 3;
-  bottom: 7%;
-  left: 28%;
-  display: flex;
-  align-items: end;
-  gap: 8px;
-}
-
-.basket {
-  position: relative;
-  display: block;
-  width: 50px;
-  height: 31px;
-  border: 5px solid #9e622f;
-  border-radius: 8px 8px 16px 16px;
-  background: repeating-linear-gradient(90deg, #d99a55 0 7px, #f2be75 7px 13px);
-  box-shadow: inset 0 4px #ffe0a0;
-}
-
-.basket::before {
-  content: "";
-  position: absolute;
-  top: -24px;
-  left: 8px;
-  width: 24px;
-  height: 22px;
-  border: 5px solid #9e622f;
-  border-bottom: 0;
-  border-radius: 20px 20px 0 0;
-}
-
-.juice-box {
-  display: grid;
-  width: 24px;
-  height: 36px;
-  place-items: center;
-  border: 3px solid #fff6d9;
-  border-radius: 4px;
-  color: #ef9c35;
-  background: #f8d64d;
-  box-shadow: 2px 3px #c87e3e;
-  font-size: 13px;
-}
-
-.ant-trails {
-  position: absolute;
-  z-index: 2;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
   pointer-events: none;
 }
 
-.ant-trails i {
-  position: absolute;
-  right: 5%;
-  width: 65%;
-  border-top: 3px dotted #4f9b5d55;
+.distant-hill { fill: #75bd68; }
+.scene-cloud { fill: #fff; opacity: 0.78; }
+.scene-cloud.small { opacity: 0.62; }
+
+.scene-flowers path {
+  fill: none;
+  stroke: #3d8c4b;
+  stroke-width: 6;
+  stroke-linecap: round;
 }
 
-.ant-trails i:nth-child(1) { top: 57%; transform: rotate(-3deg); }
-.ant-trails i:nth-child(2) { top: 66%; transform: rotate(2deg); }
-.ant-trails i:nth-child(3) { top: 75%; transform: rotate(-2deg); }
-.ant-trails i:nth-child(4) { top: 84%; transform: rotate(3deg); }
-
-.anthill {
-  position: absolute;
-  z-index: 3;
-  right: -2%;
-  bottom: 7%;
-  width: 145px;
-  height: 86px;
-  border-radius: 90% 90% 0 0;
-  background: linear-gradient(145deg, #c98448, #8d542e);
-  box-shadow: inset 16px 8px #e5aa69, 0 7px #6f4128;
+.scene-flowers circle {
+  fill: #ee7775;
+  stroke: #fff7ce;
+  stroke-width: 8;
 }
 
-.anthill span {
-  position: absolute;
-  right: 40px;
-  bottom: 0;
-  width: 53px;
-  height: 37px;
-  border-radius: 50% 50% 0 0;
-  background: #4c2f24;
-  box-shadow: inset 6px 5px #2e211d;
+.scene-flowers .flower-center {
+  fill: #f5c84d;
+  stroke: none;
 }
 
-.bush {
-  position: absolute;
-  z-index: 3;
-  right: -20px;
-  bottom: 21%;
-  width: 150px;
-  height: 100px;
+.scene-basket > path:first-child {
+  stroke: #865027;
+  stroke-width: 11;
+  stroke-linecap: round;
 }
 
-.bush i {
-  position: absolute;
-  bottom: 0;
-  border-radius: 50%;
-  background: #4f9a56;
-  box-shadow: inset 10px 10px #78c76a, 0 5px #367443;
+.scene-basket > path:nth-child(2) {
+  fill: #d99a55;
+  stroke: #865027;
+  stroke-width: 6;
 }
 
-.bush i:nth-child(1) { right: 0; width: 86px; height: 86px; }
-.bush i:nth-child(2) { right: 54px; width: 73px; height: 73px; }
-.bush i:nth-child(3) { right: 94px; width: 55px; height: 55px; }
+.scene-basket .basket-weave {
+  fill: none;
+  stroke: #f3c27e;
+  stroke-width: 6;
+}
+
+.scene-trails {
+  fill: none;
+  stroke: #438c5050;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-dasharray: 4 16;
+}
+
+.scene-bush circle {
+  fill: #4d9956;
+  stroke: #347342;
+  stroke-width: 7;
+}
+
+.scene-bush .bush-highlight {
+  fill: #75c56a;
+  stroke: none;
+}
+
+.scene-anthill > path:first-child {
+  fill: #bb7541;
+  stroke: #75452c;
+  stroke-width: 8;
+}
+
+.scene-anthill .hill-highlight {
+  fill: none;
+  stroke: #dea065;
+  stroke-width: 12;
+  stroke-linecap: round;
+}
+
+.scene-anthill .hill-door {
+  fill: #493027;
+  stroke: #673e2c;
+  stroke-width: 7;
+}
 
 .picnic-blanket {
   position: absolute;
@@ -625,7 +542,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .bug,
-  .bug span,
   .bug .ant-art,
   .bug .ant-legs,
   .sandwich,
